@@ -1,0 +1,172 @@
+# Network Type Templates
+# Reusable link specifications - define once, use across many deployments
+#
+# Specifications based on:
+# - IEEE 802.11 (WiFi) and 802.3 (Ethernet) standards
+# - 3GPP specifications (Cellular)
+# - Vendor datasheets (IoT protocols)
+
+network_types:
+  # ========== WIRED - HIGH PERFORMANCE ==========
+  
+  # Ethernet connections
+  ethernet_10g:
+    description: "10 Gigabit Ethernet (IEEE 802.3ae)"
+    latency: 0.0001             # 0.1ms
+    bandwidth: 1250000000       # 10 Gbps
+  
+  ethernet_1g:
+    description: "Gigabit Ethernet (IEEE 802.3ab)"
+    latency: 0.001              # 1ms
+    bandwidth: 125000000        # 1 Gbps
+  
+  ethernet_100m:
+    description: "Fast Ethernet (IEEE 802.3u)"
+    latency: 0.002              # 2ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  # Direct connections
+  usb_3:
+    description: "USB 3.0 Direct Connection"
+    latency: 0.0001             # 0.1ms
+    bandwidth: 625000000        # 5 Gbps
+  
+  thunderbolt:
+    description: "Thunderbolt 3/4"
+    latency: 0.0001             # 0.1ms
+    bandwidth: 5000000000       # 40 Gbps
+  
+  # ========== WIFI - LOCAL WIRELESS ==========
+  
+  wifi_excellent:
+    description: "WiFi 6 (802.11ax) - same room"
+    latency: 0.002              # 2ms
+    bandwidth: 125000000        # 1 Gbps = 125 MB/s
+  
+  wifi_good:
+    description: "WiFi 5 (802.11ac) - nearby"
+    latency: 0.005              # 5ms
+    bandwidth: 62500000         # 500 Mbps
+  
+  wifi_typical:
+    description: "WiFi 4 (802.11n) - typical"
+    latency: 0.010              # 10ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  wifi_poor:
+    description: "WiFi - far or congested"
+    latency: 0.050              # 50ms
+    bandwidth: 6250000          # 50 Mbps
+  
+  # ========== CELLULAR - MOBILE WAN ==========
+  
+  cellular_5g:
+    description: "5G New Radio (3GPP Release 15+)"
+    latency: 0.010              # 10ms
+    bandwidth: 12500000         # 100 Mbps typical
+  
+  cellular_4g:
+    description: "4G LTE (3GPP Release 8+)"
+    latency: 0.030              # 30ms
+    bandwidth: 6250000          # 50 Mbps typical
+  
+  cellular_3g:
+    description: "3G UMTS/HSPA"
+    latency: 0.100              # 100ms
+    bandwidth: 500000           # 4 Mbps
+  
+  # ========== IOT - LOW POWER WIRELESS ==========
+  
+  bluetooth:
+    description: "Bluetooth 5.0"
+    latency: 0.010              # 10ms
+    bandwidth: 375000           # 3 Mbps
+  
+  zigbee:
+    description: "Zigbee (IEEE 802.15.4)"
+    latency: 0.020              # 20ms
+    bandwidth: 31250            # 250 Kbps
+  
+  lora:
+    description: "LoRaWAN (long-range IoT)"
+    latency: 1.000              # 1 second (very slow)
+    bandwidth: 625              # ~5 Kbps (ultra-low bandwidth)
+  
+  # ========== INTERNET/WAN ==========
+  
+  internet_local:
+    description: "Internet - same city (<100km)"
+    latency: 0.020              # 20ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  internet_regional:
+    description: "Internet - same region (<1000km)"
+    latency: 0.050              # 50ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  internet_cross_country:
+    description: "Internet - cross-country (>1000km)"
+    latency: 0.100              # 100ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  internet_intercontinental:
+    description: "Internet - intercontinental"
+    latency: 0.200              # 200ms
+    bandwidth: 12500000         # 100 Mbps
+  
+  # ========== SATELLITE ==========
+  
+  satellite_leo:
+    description: "Satellite Internet - LEO (Starlink-class)"
+    latency: 0.050              # 50ms (low-earth orbit)
+    bandwidth: 12500000         # 100 Mbps
+  
+  satellite_geo:
+    description: "Satellite Internet - Geostationary"
+    latency: 0.600              # 600ms (high latency)
+    bandwidth: 1250000          # 10 Mbps
+
+    # ========== VEHICULAR COMMUNICATION (DSRC / C-V2X) ==========
+
+  dsrc_v2v:
+    description: "DSRC 802.11p Vehicle-to-Vehicle (typical urban)"
+    latency: 0.010              # 10 ms average (5–20 ms range)
+    bandwidth: 750000           # 6 Mbps effective throughput
+
+  dsrc_v2i:
+    description: "DSRC 802.11p Vehicle-to-Infrastructure (RSU)"
+    latency: 0.015              # 15 ms (slightly higher than V2V)
+    bandwidth: 1500000          # 12 Mbps (better backhaul on RSU side)
+
+  c_v2x_pc5:
+    description: "C-V2X Mode 4 (PC5 sidelink) – newer standard"
+    latency: 0.010
+    bandwidth: 3375000          # ~27 Mbps theoretical, ~20–30 Mbps real
+
+  c_v2x_uu:
+    description: "C-V2X via cellular Uu interface (through base station)"
+    latency: 0.020
+    bandwidth: 12500000         # 100 Mbps (same as good 5G)
+
+# ========== REFERENCE NOTES ==========
+#
+# Units:
+# - latency: seconds (0.001 = 1ms)
+# - bandwidth: bytes/second (NOT bits/sec!)
+#
+# Conversion Table:
+# ----------------
+# Bits/sec  →  Bytes/sec
+# 1 Kbps    =  125 B/s
+# 1 Mbps    =  125,000 B/s
+# 10 Mbps   =  1,250,000 B/s
+# 100 Mbps  =  12,500,000 B/s
+# 1 Gbps    =  125,000,000 B/s
+# 10 Gbps   =  1,250,000,000 B/s
+# 40 Gbps   =  5,000,000,000 B/s
+#
+# Sources:
+# - IEEE 802.11 (WiFi standards)
+# - IEEE 802.3 (Ethernet standards)
+# - 3GPP specifications (Cellular)
+# - Measured ping/iperf3 benchmarks

@@ -1,0 +1,201 @@
+# Device Type Templates
+# Reusable hardware specifications - define once, use across many deployments
+# 
+# Specifications based on:
+# - Manufacturer datasheets (power, memory)
+# - Benchmark measurements (cpu_speed relative to RPi4 = 1.0)
+# - IEEE/vendor network specs
+
+device_types:
+  # ========== EDGE DEVICES (Low Power) ==========
+  
+  # Raspberry Pi 4 - Baseline ARM edge device
+  raspberry_pi_4:
+    description: "Raspberry Pi 4 Model B (ARM Cortex-A72, 1.5GHz)"
+    cpu_speed: 1.0              # Baseline performance
+    memory_size: 4294967296     # 4GB RAM
+    power_idle: 2.5             # 2.5W idle (measured)
+    power_active: 5.0           # 5W active (USB-C meter)
+    power_transmit: 3.0         # 3W transmit
+    power_receive: 2.5          # 2.5W receive
+  
+  # Raspberry Pi 3 - Previous generation
+  raspberry_pi_3:
+    description: "Raspberry Pi 3 Model B+ (ARM Cortex-A53, 1.4GHz)"
+    cpu_speed: 0.7              # ~30% slower than RPi4
+    memory_size: 1073741824     # 1GB RAM
+    power_idle: 1.8
+    power_active: 4.0
+    power_transmit: 2.5
+    power_receive: 2.0
+  
+  # Raspberry Pi Zero - Ultra low power
+  raspberry_pi_zero:
+    description: "Raspberry Pi Zero W (ARM1176JZF-S, 1GHz)"
+    cpu_speed: 0.3              # Single-core, much slower
+    memory_size: 536870912      # 512MB RAM
+    power_idle: 0.8
+    power_active: 1.5           # Very low power
+    power_transmit: 1.2
+    power_receive: 1.0
+  
+  # Arduino ESP32 - IoT microcontroller
+  arduino_esp32:
+    description: "ESP32 Microcontroller (Xtensa dual-core, 240MHz)"
+    cpu_speed: 0.1              # Very limited compute
+    memory_size: 524288         # 512KB RAM
+    power_idle: 0.3
+    power_active: 0.5           # Ultra-low power
+    power_transmit: 0.8
+    power_receive: 0.4
+  
+  # ========== EDGE AI (GPU-Accelerated) ==========
+  
+  # NVIDIA Jetson Nano - Entry-level edge AI
+  jetson_nano:
+    description: "NVIDIA Jetson Nano (ARM Cortex-A57, 1.43GHz + 128-core GPU)"
+    cpu_speed: 1.2              # Slightly faster than RPi4
+    memory_size: 4294967296     # 4GB RAM
+    power_idle: 5.0
+    power_active: 10.0          # Higher due to GPU
+    power_transmit: 3.0
+    power_receive: 2.5
+  
+  # NVIDIA Jetson Xavier NX - High-performance edge AI
+  nvidia_jetson_xavier:
+    description: "NVIDIA Jetson Xavier NX (ARM Carmel, 1.9GHz + 384-core GPU)"
+    cpu_speed: 2.5              # 2.5x RPi4 + GPU acceleration
+    memory_size: 8589934592     # 8GB RAM
+    power_idle: 10.0
+    power_active: 30.0          # Significant power for edge
+    power_transmit: 5.0
+    power_receive: 4.0
+  
+  # ========== MID-RANGE COMPUTE ==========
+  
+  # Intel NUC i5 - Compact desktop
+  intel_nuc_i5:
+    description: "Intel NUC (Core i5-8259U, 2.3GHz, 4-core)"
+    cpu_speed: 2.0              # 2x RPi4
+    memory_size: 8589934592     # 8GB RAM
+    power_idle: 8.0
+    power_active: 15.0
+    power_transmit: 3.0
+    power_receive: 3.0
+  
+  # Intel NUC i7 - Higher performance compact
+  intel_nuc_i7:
+    description: "Intel NUC (Core i7-10710U, 1.1GHz base, 6-core)"
+    cpu_speed: 2.5              # 2.5x RPi4
+    memory_size: 17179869184    # 16GB RAM
+    power_idle: 10.0
+    power_active: 25.0
+    power_transmit: 4.0
+    power_receive: 3.5
+  
+  # ========== HIGH-PERFORMANCE SERVERS ==========
+  
+  # x86 Server - Standard datacenter server
+  server_x86:
+    description: "x86 Server (Intel Xeon E5-2680 v4, 2.4GHz, 14-core)"
+    cpu_speed: 3.0              # 3x RPi4 (multi-core advantage)
+    memory_size: 17179869184    # 16GB RAM
+    power_idle: 50.0            # From Intel ARK
+    power_active: 100.0         # Typical server TDP
+    power_transmit: 5.0
+    power_receive: 5.0
+  
+  # High-end Server - EPYC processor
+  server_epyc:
+    description: "AMD EPYC 7742 Server (2.25GHz, 64-core)"
+    cpu_speed: 4.0              # 4x RPi4 (massive parallelism)
+    memory_size: 68719476736    # 64GB RAM
+    power_idle: 80.0
+    power_active: 200.0         # High-power server
+    power_transmit: 8.0
+    power_receive: 8.0
+  
+  # ========== CLOUD/VIRTUALIZED ==========
+  
+  # Cloud VM (Small) - 2 vCPU instance
+  cloud_vm:
+    description: "Cloud VM - Small (2 vCPU, AWS t3.medium equivalent)"
+    cpu_speed: 1.5              # 1.5x RPi4
+    memory_size: 4294967296     # 4GB RAM
+    power_idle: 0.0             # Cloud billing abstracts power
+    power_active: 20.0          # Estimated TDP for 2 vCPU
+    power_transmit: 2.0
+    power_receive: 2.0
+  
+  # Cloud VM (Large) - 8 vCPU instance
+  cloud_vm_large:
+    description: "Cloud VM - Large (8 vCPU, AWS c5.2xlarge equivalent)"
+    cpu_speed: 2.8              # 2.8x RPi4
+    memory_size: 17179869184    # 16GB RAM
+    power_idle: 0.0
+    power_active: 60.0          # Estimated for 8 vCPU
+    power_transmit: 4.0
+    power_receive: 4.0
+  
+  # ========== MOBILE DEVICES ==========
+  
+  # Smartphone (High-end)
+  smartphone_flagship:
+    description: "Flagship Smartphone (Snapdragon 8 Gen 2, 3.2GHz)"
+    cpu_speed: 1.8              # 1.8x RPi4 (but thermal throttled)
+    memory_size: 8589934592     # 8GB RAM
+    power_idle: 1.0
+    power_active: 8.0           # Battery-constrained
+    power_transmit: 3.0
+    power_receive: 2.0
+  
+  # Tablet
+  tablet_ipad:
+    description: "Tablet (Apple M2, 3.5GHz)"
+    cpu_speed: 2.2              # 2.2x RPi4
+    memory_size: 8589934592     # 8GB RAM
+    power_idle: 2.0
+    power_active: 12.0
+    power_transmit: 3.5
+    power_receive: 2.5
+
+    # ========== CALIBRATED QPF EVALUATION DEVICES ==========
+  # Measured via calibrate_device.py (2000 iterations, 26 RIoTBench tasks)
+  # Phase 0 calibration — Feb 2026
+
+  edge_vm_calibrated:
+    description: "DigitalOcean 1-vCPU 1GB London (calibrated, median of 5 runs)"
+    cpu_speed: 1.58
+    memory_size: 1073741824
+    power_idle: 2.5
+    power_active: 6.0
+    power_transmit: 0.5
+    power_receive: 0.5
+
+  mid_vm_calibrated:
+    description: "DigitalOcean 2-vCPU 4GB London (calibrated, median of 5 runs)"
+    cpu_speed: 2.64
+    memory_size: 4294967296
+    power_idle: 5.0
+    power_active: 12.0
+    power_transmit: 0.5
+    power_receive: 0.5
+
+  ryzen_pc_calibrated:
+    description: "AMD Ryzen AI 9 365 10c/20t Kampala (calibrated, median of 5 runs)"
+    cpu_speed: 6.72
+    memory_size: 16266735616
+    power_idle: 30.0
+    power_active: 65.0
+    power_transmit: 5.0
+    power_receive: 5.0
+
+  cloud_vm_calibrated:
+    description: "DigitalOcean 4-vCPU Dedicated CPU London (calibrated, median of 5 runs)"
+    cpu_speed: 2.82
+    memory_size: 8589934592
+    power_idle: 12.0
+    power_active: 28.0
+    power_transmit: 0.5
+    power_receive: 0.5
+

@@ -1,0 +1,35 @@
+image: sphinxdoc/sphinx
+pipelines:
+  custom:
+    init-docs:
+      - step:
+          name: Initialize the CCSG web server for git ftp file synchronization
+          script:
+            - echo "Beginning init-docs"
+            - apt-get -qq -y update
+            - apt-get -y install git-ftp
+            - git ftp init -vv -u "$CCSG_FTP_USER" -p "$CCSG_FTP_PASSWORD" --insecure --remote-root "$CCSG_FTP_REMOTE_ROOT" --syncroot "$CCSG_FTP_SYNCROOT" sftp://$CCSG_FTP_HOST
+    build-and-deploy-docs:
+      - step:
+          name: Build documentation files from source and deploy to the CCSG web server
+          caches:
+            - pip
+          script:
+            - echo "Beginning documentation build process"
+            - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+            - cd ./docs && make clean html
+            - echo "Beginning documentation deployment"
+            - cd ..
+            - apt-get -qq -y update
+            - apt-get -y install sshpass
+            - echo -e "cd $CCSG_FTP_REMOTE_ROOT \n put $CCSG_FTP_SYNCROOT/*" | sshpass -p $CCSG_FTP_PASSWORD sftp -r -o StrictHostKeyChecking=no $CCSG_FTP_USER@$CCSG_FTP_HOST
+  branches:
+    master:
+      - step:
+          name: Run tests
+          caches:
+            - pip
+          script:
+            - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+            - python3 ./main.py
+
