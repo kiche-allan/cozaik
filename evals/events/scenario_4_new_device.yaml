@@ -1,0 +1,28 @@
+# Scenario 4: New Device Integration
+# ====================================
+# Tests the system's ability to integrate a newly appearing device.
+#
+# For 3-CAV workload: Add cav3 (not in original deployment)
+# For 4-CAV workload: Add cav4
+# For 6-CAV workload: Add cav6
+#
+# Expected behavior:
+# 1. At 10s: New device announces itself
+# 2. System validates device capabilities against catalog
+# 3. System adds device to available pool
+# 4. System assesses migration opportunities using ObjectiveCalculator
+# 5. If beneficial (>15% improvement), tasks may migrate
+#
+# Success criteria:
+# - Device successfully integrated
+# - Makespan may improve (new resource available)
+# - 0-1 adaptation events (depending on migration benefit)
+
+scenario: new_device_integration
+description: "Add new cav3 device at 10 seconds - tests dynamic discovery"
+
+events:
+  - time: 10.0
+    type: new_device
+    device: cav3
+    device_type: jetson_nano

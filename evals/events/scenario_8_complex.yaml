@@ -1,0 +1,45 @@
+# Scenario 8: Complex Mixed Events
+# ==================================
+# Comprehensive test with multiple event types.
+#
+# Timeline:
+# - 5s:  cav1 fails
+# - 10s: cav3 (new device) joins
+# - 15s: cav1 recovers
+# - 18s: cav0 experiences brief glitch
+# - 25s: cav2 fails
+#
+# Expected behavior:
+# System handles all events correctly, maintaining operation.
+#
+# Success criteria:
+# - Multiple adaptation events handled
+# - Glitch correctly identified (no false positive)
+# - New device integrated
+# - Final state stable with available resources
+
+scenario: complex_mixed_events
+description: "Comprehensive test with failure, recovery, new device, and glitch"
+
+events:
+  - time: 5.0
+    type: failure
+    device: cav1
+    
+  - time: 10.0
+    type: new_device
+    device: cav3
+    device_type: jetson_nano
+    
+  - time: 15.0
+    type: recovery
+    device: cav1
+    
+  - time: 18.0
+    type: glitch
+    device: cav0
+    duration: 1.5
+    
+  - time: 25.0
+    type: failure
+    device: cav2

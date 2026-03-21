@@ -1,0 +1,22 @@
+# Scenario 1: Single Device Failure
+# =================================
+# Tests the system's ability to detect and recover from a sudden device failure.
+#
+# Expected behavior:
+# 1. System detects failure within heartbeat timeout (2-10s depending on app type)
+# 2. RuntimeAdapter.on_device_failure() is triggered
+# 3. Orphaned SQs are remapped to surviving devices
+# 4. Execution resumes with new mapping
+#
+# Success criteria:
+# - Recovery latency < 500ms (remapping time)
+# - No deadlines missed during adaptation
+# - 1 adaptation event recorded
+
+scenario: single_device_failure
+description: "Kill cav1 at 5 seconds, measure recovery"
+
+events:
+  - time: 5.0
+    type: failure
+    device: cav1

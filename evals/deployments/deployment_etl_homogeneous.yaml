@@ -1,0 +1,69 @@
+# Deployment Configuration: eval_etl (ETL Pipeline) - HOMOGENEOUS
+#
+# All devices are raspberry_pi_4 — uniform hardware, same execution
+# time characteristics. QPF optimizes purely for communication cost
+# and load balancing since compute speed is identical across devices.
+#
+# Placement flexibility:
+#   - "sensor_interface" SQs → device_a, device_b (2 options)
+#   - "compute" SQs → device_b, device_c, device_d, device_e (4 options)
+#   - "mqtt_broker" SQs → device_d, device_e (2 options)
+#   - Unconstrained SQs → all devices (5 options)
+
+application:
+  name: eval_etl
+  description: "RIoTBench ETL pipeline - homogeneous cluster"
+
+devices:
+  - id: device_a
+    type: raspberry_pi_4
+    location: sensor_node
+    components:
+      sensor_interface: true
+
+  - id: device_b
+    type: raspberry_pi_4
+    location: edge_site_0
+    components:
+      sensor_interface: true
+      compute: true
+
+  - id: device_c
+    type: raspberry_pi_4
+    location: edge_site_1
+    components:
+      compute: true
+
+  - id: device_d
+    type: raspberry_pi_4
+    location: fog_site
+    components:
+      compute: true
+      mqtt_broker: true
+
+  - id: device_e
+    type: raspberry_pi_4
+    location: datacenter
+    components:
+      compute: true
+      mqtt_broker: true
+
+network:
+  - link: [device_a, device_b]
+    type: ethernet_1g
+  - link: [device_a, device_c]
+    type: ethernet_1g
+  - link: [device_b, device_c]
+    type: ethernet_1g
+  - link: [device_b, device_d]
+    type: ethernet_1g
+  - link: [device_c, device_d]
+    type: ethernet_1g
+  - link: [device_d, device_e]
+    type: ethernet_1g
+  - link: [device_a, device_e]
+    type: ethernet_1g
+  - link: [device_b, device_e]
+    type: ethernet_1g
+  - link: [device_c, device_e]
+    type: ethernet_1g

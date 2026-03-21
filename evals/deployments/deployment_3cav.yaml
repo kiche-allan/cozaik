@@ -1,0 +1,89 @@
+# Deployment Configuration for 3-CAV Evaluation Workload
+# Application: eval_3cav_fusion.py
+#
+# Extension of deployment_two_cavs.yaml with one additional CAV.
+# Tests QPF's ability to optimize placement across more devices.
+
+application:
+  name: "eval_3cav_deployment"
+  description: "Three cooperative autonomous vehicles with roadside unit for V2V2I fusion"
+
+devices:
+  # Connected Autonomous Vehicle 0
+  - id: cav0
+    type: jetson_nano
+    location: vehicle_0
+    components:
+      camera: true      # Front-facing camera
+      lidar: true       # 360° lidar
+      gpu: true         # Edge GPU for local processing
+      gpio: true        # Sensor interfaces
+      network: true     # V2V/V2I communication
+
+  # Connected Autonomous Vehicle 1
+  - id: cav1
+    type: jetson_nano
+    location: vehicle_1
+    components:
+      camera: true
+      lidar: true
+      gpu: true
+      gpio: true
+      network: true
+
+  # Connected Autonomous Vehicle 2 (NEW)
+  - id: cav2
+    type: jetson_nano
+    location: vehicle_2
+    components:
+      camera: true
+      lidar: true
+      gpu: true
+      gpio: true
+      network: true
+
+  # Roadside Unit (RSU) for global coordination
+  - id: rsu
+    type: server_x86
+    location: roadside_infrastructure
+    components:
+      gpu: true         # Powerful GPU for global fusion
+      nvme: true        # Fast storage for logging
+      network: true     # High-bandwidth V2I link
+
+network:
+  # CAV 0 to RSU link
+  - link: [cav0, rsu]
+    type: cellular_5g
+    bandwidth: 100  # Mbps
+    latency: 10     # ms
+
+  # CAV 1 to RSU link
+  - link: [cav1, rsu]
+    type: cellular_5g
+    bandwidth: 100
+    latency: 10
+
+  # CAV 2 to RSU link (NEW)
+  - link: [cav2, rsu]
+    type: cellular_5g
+    bandwidth: 100
+    latency: 10
+
+  # CAV 0 to CAV 1 direct V2V link
+  - link: [cav0, cav1]
+    type: wifi_good
+    bandwidth: 50
+    latency: 5
+
+  # CAV 0 to CAV 2 direct V2V link (NEW)
+  - link: [cav0, cav2]
+    type: wifi_good
+    bandwidth: 50
+    latency: 5
+
+  # CAV 1 to CAV 2 direct V2V link (NEW)
+  - link: [cav1, cav2]
+    type: wifi_good
+    bandwidth: 50
+    latency: 5

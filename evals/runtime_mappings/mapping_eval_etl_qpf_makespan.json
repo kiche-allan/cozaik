@@ -1,0 +1,67 @@
+{
+  "run_id": "eval_etl_qpf_makespan",
+  "workload": "eval_etl",
+  "strategy": "qpf_makespan",
+  "predicted_makespan_ms": 290.6842202884215,
+  "predicted_energy_joules": 9.84896765506184,
+  "trial_id": 13,
+  "seed": 13,
+  "mapping": {
+    "CONST-0": "edge0",
+    "READ_TTCLOCK-1": "mid0",
+    "CONST-2": "edge0",
+    "CONST-3": "cloud0",
+    "MULT-4": "cloud0",
+    "ADD-5": "cloud0",
+    "VALUES_TO_TTTIME-6": "mid0",
+    "COPY_TTTIME-7": "cloud0",
+    "CONST-8": "edge0",
+    "senml_spout-9": "edge0",
+    "senml_parse-10": "edge0",
+    "range_filter-11": "cloud0",
+    "bloom_filter-12": "cloud0",
+    "interpolation-13": "mid0",
+    "join_bolt-14": "cloud0",
+    "annotation-15": "cloud0",
+    "csv_to_senml-16": "cloud0",
+    "mqtt_publish-17": "cloud0",
+    "etl_sink-18": "mid0"
+  },
+  "device_distribution": {
+    "edge0": {
+      "sq_count": 5,
+      "sq_names": [
+        "CONST-0",
+        "CONST-2",
+        "CONST-8",
+        "senml_spout-9",
+        "senml_parse-10"
+      ]
+    },
+    "mid0": {
+      "sq_count": 4,
+      "sq_names": [
+        "READ_TTCLOCK-1",
+        "VALUES_TO_TTTIME-6",
+        "interpolation-13",
+        "etl_sink-18"
+      ]
+    },
+    "cloud0": {
+      "sq_count": 10,
+      "sq_names": [
+        "CONST-3",
+        "MULT-4",
+        "ADD-5",
+        "COPY_TTTIME-7",
+        "range_filter-11",
+        "bloom_filter-12",
+        "join_bolt-14",
+        "annotation-15",
+        "csv_to_senml-16",
+        "mqtt_publish-17"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_etl_qpf_makespan.json"
+}

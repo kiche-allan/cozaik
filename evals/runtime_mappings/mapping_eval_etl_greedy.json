@@ -1,0 +1,62 @@
+{
+  "run_id": "eval_etl_greedy",
+  "workload": "eval_etl",
+  "strategy": "greedy",
+  "predicted_makespan_ms": 287.7182314915163,
+  "predicted_energy_joules": 10.311007587964449,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-0": "cloud0",
+    "READ_TTCLOCK-1": "cloud0",
+    "CONST-2": "cloud0",
+    "CONST-3": "cloud0",
+    "CONST-8": "edge0",
+    "MULT-4": "cloud0",
+    "ADD-5": "cloud0",
+    "VALUES_TO_TTTIME-6": "cloud0",
+    "COPY_TTTIME-7": "cloud0",
+    "senml_spout-9": "edge0",
+    "senml_parse-10": "edge0",
+    "range_filter-11": "cloud0",
+    "bloom_filter-12": "cloud0",
+    "interpolation-13": "cloud0",
+    "join_bolt-14": "cloud0",
+    "annotation-15": "cloud0",
+    "csv_to_senml-16": "cloud0",
+    "mqtt_publish-17": "cloud0",
+    "etl_sink-18": "cloud0"
+  },
+  "device_distribution": {
+    "cloud0": {
+      "sq_count": 16,
+      "sq_names": [
+        "CONST-0",
+        "READ_TTCLOCK-1",
+        "CONST-2",
+        "CONST-3",
+        "MULT-4",
+        "ADD-5",
+        "VALUES_TO_TTTIME-6",
+        "COPY_TTTIME-7",
+        "range_filter-11",
+        "bloom_filter-12",
+        "interpolation-13",
+        "join_bolt-14",
+        "annotation-15",
+        "csv_to_senml-16",
+        "mqtt_publish-17",
+        "etl_sink-18"
+      ]
+    },
+    "edge0": {
+      "sq_count": 3,
+      "sq_names": [
+        "CONST-8",
+        "senml_spout-9",
+        "senml_parse-10"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_etl_greedy.json"
+}

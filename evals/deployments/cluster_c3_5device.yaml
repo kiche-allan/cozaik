@@ -1,0 +1,79 @@
+# Cluster C3: Multi-tier 5-device (analytical)
+# 2 edge (1.99x) + 1 mid (2.63x) + 1 PC (4.49x) + 1 server (3.0x)
+# Purpose: Tests QPF at moderate scale with 3-tier heterogeneity and mixed
+# network — more placement options stress the optimization search
+
+application:
+  name: qpf_evaluation
+  description: "Multi-tier 5-device cluster (edge/mid/compute/server)"
+
+devices:
+  - id: edge0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: edge1
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: mid0
+    type: mid_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: pc0
+    type: ryzen_pc_calibrated
+    location: kampala
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: server0
+    type: server_x86
+    location: cloud_eu
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+network:
+  # London DC internal — co-located VMs
+  - link: [edge0, edge1]
+    type: ethernet_1g
+  - link: [edge0, mid0]
+    type: ethernet_1g
+  - link: [edge1, mid0]
+    type: ethernet_1g
+  # EU cloud server to London DC — same region
+  - link: [server0, edge0]
+    type: internet_local
+  - link: [server0, edge1]
+    type: internet_local
+  - link: [server0, mid0]
+    type: internet_local
+  # Kampala PC to London/EU — intercontinental
+  - link: [pc0, edge0]
+    type: internet_intercontinental
+  - link: [pc0, edge1]
+    type: internet_intercontinental
+  - link: [pc0, mid0]
+    type: internet_intercontinental
+  - link: [pc0, server0]
+    type: internet_regional

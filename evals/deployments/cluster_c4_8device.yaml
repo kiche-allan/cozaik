@@ -1,0 +1,155 @@
+# Cluster C4: Large-scale 8-device stress test (analytical)
+# 3 edge (1.99x) + 2 mid (2.63x) + 1 NUC (2.0x) + 1 PC (4.49x) + 1 EPYC (4.0x)
+# Purpose: Maximum placement complexity — 8 devices with 4 speed tiers and
+# mixed network creates combinatorial explosion that stresses QPF search
+
+application:
+  name: qpf_evaluation
+  description: "Large-scale 8-device cluster (4-tier heterogeneous)"
+
+devices:
+  # --- Edge tier (sensor-proximate) ---
+  - id: edge0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: edge1
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: edge2
+    type: edge_vm_calibrated
+    location: frankfurt_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  # --- Mid tier (edge gateway) ---
+  - id: mid0
+    type: mid_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: mid1
+    type: mid_vm_calibrated
+    location: frankfurt_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  # --- Compute tier (local workstations) ---
+  - id: nuc0
+    type: intel_nuc_i5
+    location: london_office
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: pc0
+    type: ryzen_pc_calibrated
+    location: kampala
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  # --- Cloud tier ---
+  - id: server0
+    type: server_epyc
+    location: cloud_eu
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+network:
+  # London DC internal (edge0, edge1, mid0 co-located)
+  - link: [edge0, edge1]
+    type: ethernet_1g
+  - link: [edge0, mid0]
+    type: ethernet_1g
+  - link: [edge1, mid0]
+    type: ethernet_1g
+
+  # Frankfurt DC internal (edge2, mid1 co-located)
+  - link: [edge2, mid1]
+    type: ethernet_1g
+
+  # London ↔ Frankfurt (same continent, different DC)
+  - link: [edge0, edge2]
+    type: internet_local
+  - link: [edge1, edge2]
+    type: internet_local
+  - link: [mid0, mid1]
+    type: internet_local
+  - link: [edge0, mid1]
+    type: internet_local
+  - link: [edge1, mid1]
+    type: internet_local
+  - link: [mid0, edge2]
+    type: internet_local
+
+  # London office NUC ↔ London DC (same city)
+  - link: [nuc0, edge0]
+    type: internet_local
+  - link: [nuc0, edge1]
+    type: internet_local
+  - link: [nuc0, mid0]
+    type: internet_local
+  # NUC ↔ Frankfurt
+  - link: [nuc0, edge2]
+    type: internet_local
+  - link: [nuc0, mid1]
+    type: internet_local
+
+  # EU cloud server ↔ EU DCs (regional)
+  - link: [server0, edge0]
+    type: internet_local
+  - link: [server0, edge1]
+    type: internet_local
+  - link: [server0, mid0]
+    type: internet_local
+  - link: [server0, edge2]
+    type: internet_local
+  - link: [server0, mid1]
+    type: internet_local
+  - link: [server0, nuc0]
+    type: internet_local
+
+  # Kampala PC ↔ everything (intercontinental)
+  - link: [pc0, edge0]
+    type: internet_intercontinental
+  - link: [pc0, edge1]
+    type: internet_intercontinental
+  - link: [pc0, edge2]
+    type: internet_intercontinental
+  - link: [pc0, mid0]
+    type: internet_intercontinental
+  - link: [pc0, mid1]
+    type: internet_intercontinental
+  - link: [pc0, nuc0]
+    type: internet_intercontinental
+  - link: [pc0, server0]
+    type: internet_regional

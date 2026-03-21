@@ -1,0 +1,56 @@
+# Deployment Configuration: eval_train (ML Training Pipeline) - HOMOGENEOUS
+#
+# All devices are intel_nuc_i5 — uniform hardware. QPF optimizes
+# purely for communication cost and load balancing.
+#
+# Placement flexibility:
+#   - "compute" SQs → device_a, device_b, device_c, device_d (4 options)
+#   - "storage" SQs → device_c, device_d (2 options)
+#   - "storage" + "mqtt_broker" SQs → device_d only (1 option)
+#   - Unconstrained SQs → all devices (4 options)
+
+application:
+  name: eval_train
+  description: "ML training pipeline - homogeneous cluster"
+
+devices:
+  - id: device_a
+    type: intel_nuc_i5
+    location: edge_site_0
+    components:
+      compute: true
+
+  - id: device_b
+    type: intel_nuc_i5
+    location: edge_site_1
+    components:
+      compute: true
+
+  - id: device_c
+    type: intel_nuc_i5
+    location: fog_site
+    components:
+      compute: true
+      storage: true
+
+  - id: device_d
+    type: intel_nuc_i5
+    location: datacenter
+    components:
+      compute: true
+      storage: true
+      mqtt_broker: true
+
+network:
+  - link: [device_a, device_b]
+    type: ethernet_1g
+  - link: [device_a, device_c]
+    type: ethernet_1g
+  - link: [device_a, device_d]
+    type: ethernet_1g
+  - link: [device_b, device_c]
+    type: ethernet_1g
+  - link: [device_b, device_d]
+    type: ethernet_1g
+  - link: [device_c, device_d]
+    type: ethernet_1g

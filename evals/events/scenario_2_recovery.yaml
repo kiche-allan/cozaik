@@ -1,0 +1,27 @@
+# Scenario 2: Failure then Recovery
+# ==================================
+# Tests the system's ability to handle device rejoin after failure.
+#
+# Expected behavior:
+# 1. At 5s: cav1 fails, system remaps its tasks
+# 2. At 15s: cav1 recovers, system detects rejoin
+# 3. System assesses migration opportunities
+# 4. Tasks may be rebalanced back to recovered device (if beneficial)
+#
+# Success criteria:
+# - Initial recovery < 500ms
+# - Rejoin detected within heartbeat interval
+# - 2 adaptation events (failure + optional rebalance)
+# - Final makespan returns close to baseline
+
+scenario: failure_then_recovery
+description: "Kill cav1 at 5s, restart at 15s"
+
+events:
+  - time: 5.0
+    type: failure
+    device: cav1
+    
+  - time: 15.0
+    type: recovery
+    device: cav1

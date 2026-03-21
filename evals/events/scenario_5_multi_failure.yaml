@@ -1,0 +1,27 @@
+# Scenario 5: Multiple Concurrent Failures
+# ==========================================
+# Stress test: Multiple devices fail simultaneously.
+#
+# Expected behavior:
+# 1. At 5s: cav0 and cav1 fail simultaneously
+# 2. System detects both failures
+# 3. RuntimeAdapter handles multiple orphaned task sets
+# 4. Remaining devices (cav2, rsu) absorb workload
+#
+# Success criteria:
+# - All essential tasks remapped successfully
+# - Graceful degradation for normal-priority tasks if needed
+# - Recovery latency may be higher due to larger remapping
+# - System remains operational (doesn't crash)
+
+scenario: multiple_concurrent_failures
+description: "Kill cav0 and cav1 simultaneously at 5s - stress test"
+
+events:
+  - time: 5.0
+    type: failure
+    device: cav0
+    
+  - time: 5.0
+    type: failure
+    device: cav1

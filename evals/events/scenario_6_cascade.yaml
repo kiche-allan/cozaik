@@ -1,0 +1,27 @@
+# Scenario 6: Cascade Failure
+# ============================
+# Stress test: Second failure occurs during recovery from first.
+#
+# Expected behavior:
+# 1. At 5s: cav1 fails, system begins adaptation
+# 2. At 6s: cav2 fails before cav1 recovery completes
+# 3. System must handle overlapping adaptation events
+# 4. Final stable state with cav0 and rsu only
+#
+# Success criteria:
+# - Both failures handled without deadlock
+# - Essential tasks preserved
+# - System reaches stable state
+# - Possible higher makespan due to reduced resources
+
+scenario: cascade_failure
+description: "cav1 fails at 5s, cav2 fails at 6s - overlapping adaptations"
+
+events:
+  - time: 5.0
+    type: failure
+    device: cav1
+    
+  - time: 6.0
+    type: failure
+    device: cav2

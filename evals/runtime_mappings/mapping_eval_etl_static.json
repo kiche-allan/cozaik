@@ -1,0 +1,62 @@
+{
+  "run_id": "eval_etl_static",
+  "workload": "eval_etl",
+  "strategy": "static",
+  "predicted_makespan_ms": 442.08644519217495,
+  "predicted_energy_joules": 9.20385498675259,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-0": "edge0",
+    "READ_TTCLOCK-1": "edge0",
+    "CONST-2": "edge0",
+    "CONST-3": "edge0",
+    "MULT-4": "edge0",
+    "ADD-5": "edge0",
+    "VALUES_TO_TTTIME-6": "edge0",
+    "COPY_TTTIME-7": "edge0",
+    "CONST-8": "edge0",
+    "senml_spout-9": "edge0",
+    "senml_parse-10": "edge0",
+    "range_filter-11": "edge0",
+    "bloom_filter-12": "edge0",
+    "interpolation-13": "edge0",
+    "join_bolt-14": "edge0",
+    "annotation-15": "edge0",
+    "csv_to_senml-16": "edge0",
+    "mqtt_publish-17": "mid0",
+    "etl_sink-18": "mid0"
+  },
+  "device_distribution": {
+    "edge0": {
+      "sq_count": 17,
+      "sq_names": [
+        "CONST-0",
+        "READ_TTCLOCK-1",
+        "CONST-2",
+        "CONST-3",
+        "MULT-4",
+        "ADD-5",
+        "VALUES_TO_TTTIME-6",
+        "COPY_TTTIME-7",
+        "CONST-8",
+        "senml_spout-9",
+        "senml_parse-10",
+        "range_filter-11",
+        "bloom_filter-12",
+        "interpolation-13",
+        "join_bolt-14",
+        "annotation-15",
+        "csv_to_senml-16"
+      ]
+    },
+    "mid0": {
+      "sq_count": 2,
+      "sq_names": [
+        "mqtt_publish-17",
+        "etl_sink-18"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_etl_static.json"
+}

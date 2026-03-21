@@ -1,0 +1,65 @@
+{
+  "run_id": "eval_stats_random",
+  "workload": "eval_stats",
+  "strategy": "random",
+  "predicted_makespan_ms": 334.4447581127733,
+  "predicted_energy_joules": 9.833862390252888,
+  "trial_id": 23,
+  "seed": 23,
+  "mapping": {
+    "CONST-19": "mid0",
+    "READ_TTCLOCK-20": "edge0",
+    "CONST-21": "edge0",
+    "CONST-22": "cloud0",
+    "CONST-27": "mid0",
+    "COPY_TTTIME-26": "mid0",
+    "VALUES_TO_TTTIME-25": "edge0",
+    "ADD-24": "edge0",
+    "MULT-23": "mid0",
+    "stats_spout-28": "mid0",
+    "parse_project-29": "mid0",
+    "bloom_filter_check-30": "mid0",
+    "kalman_filter-31": "mid0",
+    "distinct_approx_count-34": "mid0",
+    "second_order_moment-33": "mid0",
+    "simple_linear_regression-32": "mid0",
+    "mqtt_publish_stats-35": "mid0",
+    "stats_sink-36": "mid0"
+  },
+  "device_distribution": {
+    "mid0": {
+      "sq_count": 13,
+      "sq_names": [
+        "CONST-19",
+        "CONST-27",
+        "COPY_TTTIME-26",
+        "MULT-23",
+        "stats_spout-28",
+        "parse_project-29",
+        "bloom_filter_check-30",
+        "kalman_filter-31",
+        "distinct_approx_count-34",
+        "second_order_moment-33",
+        "simple_linear_regression-32",
+        "mqtt_publish_stats-35",
+        "stats_sink-36"
+      ]
+    },
+    "edge0": {
+      "sq_count": 4,
+      "sq_names": [
+        "READ_TTCLOCK-20",
+        "CONST-21",
+        "VALUES_TO_TTTIME-25",
+        "ADD-24"
+      ]
+    },
+    "cloud0": {
+      "sq_count": 1,
+      "sq_names": [
+        "CONST-22"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_stats_random.json"
+}

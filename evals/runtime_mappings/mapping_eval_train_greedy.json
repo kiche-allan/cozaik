@@ -1,0 +1,53 @@
+{
+  "run_id": "eval_train_greedy",
+  "workload": "eval_train",
+  "strategy": "greedy",
+  "predicted_makespan_ms": 282.4645390070922,
+  "predicted_energy_joules": 11.298581560283687,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-67": "cloud0",
+    "READ_TTCLOCK-68": "cloud0",
+    "CONST-69": "cloud0",
+    "CONST-70": "cloud0",
+    "CONST-75": "cloud0",
+    "MULT-71": "cloud0",
+    "ADD-72": "cloud0",
+    "VALUES_TO_TTTIME-73": "cloud0",
+    "COPY_TTTIME-74": "cloud0",
+    "train_timer_spout-76": "cloud0",
+    "azure_table_range_query-77": "cloud0",
+    "linear_regression_train-78": "cloud0",
+    "annotate_dt_class-79": "cloud0",
+    "decision_tree_train-80": "cloud0",
+    "azure_blob_upload-81": "cloud0",
+    "mqtt_publish_train-82": "cloud0",
+    "train_sink-83": "cloud0"
+  },
+  "device_distribution": {
+    "cloud0": {
+      "sq_count": 17,
+      "sq_names": [
+        "CONST-67",
+        "READ_TTCLOCK-68",
+        "CONST-69",
+        "CONST-70",
+        "CONST-75",
+        "MULT-71",
+        "ADD-72",
+        "VALUES_TO_TTTIME-73",
+        "COPY_TTTIME-74",
+        "train_timer_spout-76",
+        "azure_table_range_query-77",
+        "linear_regression_train-78",
+        "annotate_dt_class-79",
+        "decision_tree_train-80",
+        "azure_blob_upload-81",
+        "mqtt_publish_train-82",
+        "train_sink-83"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_train_greedy.json"
+}

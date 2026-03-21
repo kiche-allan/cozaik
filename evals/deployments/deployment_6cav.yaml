@@ -1,0 +1,83 @@
+# Deployment configuration for 6-CAV evaluation
+# Homogeneous: All CAVs use Jetson Nano, RSU uses server
+
+application:
+  name: eval_6cav_fusion
+  description: "6-CAV sensor fusion evaluation workload"
+
+devices:
+  - id: cav0
+    type: jetson_nano
+    location: vehicle_0
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav1
+    type: jetson_nano
+    location: vehicle_1
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav2
+    type: jetson_nano
+    location: vehicle_2
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav3
+    type: jetson_nano
+    location: vehicle_3
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav4
+    type: jetson_nano
+    location: vehicle_4
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav5
+    type: jetson_nano
+    location: vehicle_5
+    components:
+      camera: true
+      lidar: true
+
+  - id: rsu
+    type: server_x86
+    location: roadside
+    components:
+      display: true
+
+network:
+  # CAV to RSU links
+  - link: [cav0, rsu]
+    type: dsrc_v2i
+  - link: [cav1, rsu]
+    type: dsrc_v2i
+  - link: [cav2, rsu]
+    type: dsrc_v2i
+  - link: [cav3, rsu]
+    type: dsrc_v2i
+  - link: [cav4, rsu]
+    type: dsrc_v2i
+  - link: [cav5, rsu]
+    type: dsrc_v2i
+  # V2V mesh (adjacent vehicles)
+  - link: [cav0, cav1]
+    type: dsrc_v2v
+  - link: [cav1, cav2]
+    type: dsrc_v2v
+  - link: [cav2, cav3]
+    type: dsrc_v2v
+  - link: [cav3, cav4]
+    type: dsrc_v2v
+  - link: [cav4, cav5]
+    type: dsrc_v2v
+  - link: [cav0, cav5]
+    type: dsrc_v2v

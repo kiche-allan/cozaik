@@ -1,0 +1,63 @@
+{
+  "run_id": "eval_train_random",
+  "workload": "eval_train",
+  "strategy": "random",
+  "predicted_makespan_ms": 311.49021265822785,
+  "predicted_energy_joules": 9.145226026616525,
+  "trial_id": 23,
+  "seed": 23,
+  "mapping": {
+    "CONST-67": "mid0",
+    "READ_TTCLOCK-68": "edge0",
+    "CONST-69": "edge0",
+    "CONST-70": "cloud0",
+    "CONST-75": "mid0",
+    "COPY_TTTIME-74": "mid0",
+    "ADD-72": "edge0",
+    "VALUES_TO_TTTIME-73": "edge0",
+    "MULT-71": "mid0",
+    "train_timer_spout-76": "mid0",
+    "azure_table_range_query-77": "mid0",
+    "linear_regression_train-78": "mid0",
+    "annotate_dt_class-79": "mid0",
+    "azure_blob_upload-81": "mid0",
+    "decision_tree_train-80": "mid0",
+    "mqtt_publish_train-82": "mid0",
+    "train_sink-83": "mid0"
+  },
+  "device_distribution": {
+    "mid0": {
+      "sq_count": 12,
+      "sq_names": [
+        "CONST-67",
+        "CONST-75",
+        "COPY_TTTIME-74",
+        "MULT-71",
+        "train_timer_spout-76",
+        "azure_table_range_query-77",
+        "linear_regression_train-78",
+        "annotate_dt_class-79",
+        "azure_blob_upload-81",
+        "decision_tree_train-80",
+        "mqtt_publish_train-82",
+        "train_sink-83"
+      ]
+    },
+    "edge0": {
+      "sq_count": 4,
+      "sq_names": [
+        "READ_TTCLOCK-68",
+        "CONST-69",
+        "ADD-72",
+        "VALUES_TO_TTTIME-73"
+      ]
+    },
+    "cloud0": {
+      "sq_count": 1,
+      "sq_names": [
+        "CONST-70"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_train_random.json"
+}

@@ -1,0 +1,60 @@
+{
+  "run_id": "eval_stats_static",
+  "workload": "eval_stats",
+  "strategy": "static",
+  "predicted_makespan_ms": 510.9928804326812,
+  "predicted_energy_joules": 10.696452827562716,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-19": "edge0",
+    "READ_TTCLOCK-20": "edge0",
+    "CONST-21": "edge0",
+    "CONST-22": "edge0",
+    "MULT-23": "edge0",
+    "ADD-24": "edge0",
+    "VALUES_TO_TTTIME-25": "edge0",
+    "COPY_TTTIME-26": "edge0",
+    "CONST-27": "edge0",
+    "stats_spout-28": "edge0",
+    "parse_project-29": "edge0",
+    "bloom_filter_check-30": "edge0",
+    "kalman_filter-31": "edge0",
+    "simple_linear_regression-32": "edge0",
+    "second_order_moment-33": "edge0",
+    "distinct_approx_count-34": "edge0",
+    "mqtt_publish_stats-35": "mid0",
+    "stats_sink-36": "mid0"
+  },
+  "device_distribution": {
+    "edge0": {
+      "sq_count": 16,
+      "sq_names": [
+        "CONST-19",
+        "READ_TTCLOCK-20",
+        "CONST-21",
+        "CONST-22",
+        "MULT-23",
+        "ADD-24",
+        "VALUES_TO_TTTIME-25",
+        "COPY_TTTIME-26",
+        "CONST-27",
+        "stats_spout-28",
+        "parse_project-29",
+        "bloom_filter_check-30",
+        "kalman_filter-31",
+        "simple_linear_regression-32",
+        "second_order_moment-33",
+        "distinct_approx_count-34"
+      ]
+    },
+    "mid0": {
+      "sq_count": 2,
+      "sq_names": [
+        "mqtt_publish_stats-35",
+        "stats_sink-36"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_stats_static.json"
+}

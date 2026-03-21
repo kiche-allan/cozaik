@@ -1,0 +1,89 @@
+{
+  "run_id": "eval_pred_static",
+  "workload": "eval_pred",
+  "strategy": "static",
+  "predicted_makespan_ms": 452.08289649712316,
+  "predicted_energy_joules": 13.350965357511773,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-37": "edge0",
+    "CONST-38": "edge0",
+    "READ_TTCLOCK-39": "edge0",
+    "CONST-40": "edge0",
+    "CONST-41": "edge0",
+    "MULT-42": "edge0",
+    "ADD-43": "edge0",
+    "VALUES_TO_TTTIME-44": "edge0",
+    "COPY_TTTIME-45": "edge0",
+    "CONST-46": "edge0",
+    "CONST-47": "edge0",
+    "MULT-48": "edge0",
+    "ADD-49": "edge0",
+    "VALUES_TO_TTTIME-50": "edge0",
+    "COPY_TTTIME-51": "edge0",
+    "CONST-52": "cloud0",
+    "mqtt_subscribe_spout-53": "cloud0",
+    "blob_download-54": "cloud0",
+    "CONST-55": "cloud0",
+    "mqtt_subscribe_spout-56": "cloud0",
+    "blob_download-57": "cloud0",
+    "CONST-58": "edge0",
+    "pred_data_spout-59": "edge0",
+    "senml_parse_pred-60": "edge0",
+    "decision_tree_classify-61": "edge0",
+    "linear_regression_predict-62": "edge0",
+    "block_window_average-63": "edge0",
+    "error_estimation-64": "edge0",
+    "mqtt_publish_pred-65": "mid0",
+    "pred_sink-66": "mid0"
+  },
+  "device_distribution": {
+    "edge0": {
+      "sq_count": 22,
+      "sq_names": [
+        "CONST-37",
+        "CONST-38",
+        "READ_TTCLOCK-39",
+        "CONST-40",
+        "CONST-41",
+        "MULT-42",
+        "ADD-43",
+        "VALUES_TO_TTTIME-44",
+        "COPY_TTTIME-45",
+        "CONST-46",
+        "CONST-47",
+        "MULT-48",
+        "ADD-49",
+        "VALUES_TO_TTTIME-50",
+        "COPY_TTTIME-51",
+        "CONST-58",
+        "pred_data_spout-59",
+        "senml_parse_pred-60",
+        "decision_tree_classify-61",
+        "linear_regression_predict-62",
+        "block_window_average-63",
+        "error_estimation-64"
+      ]
+    },
+    "cloud0": {
+      "sq_count": 6,
+      "sq_names": [
+        "CONST-52",
+        "mqtt_subscribe_spout-53",
+        "blob_download-54",
+        "CONST-55",
+        "mqtt_subscribe_spout-56",
+        "blob_download-57"
+      ]
+    },
+    "mid0": {
+      "sq_count": 2,
+      "sq_names": [
+        "mqtt_publish_pred-65",
+        "pred_sink-66"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_pred_static.json"
+}

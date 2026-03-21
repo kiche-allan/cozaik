@@ -1,0 +1,34 @@
+application:
+  name: qpf_evaluation
+  description: "Heterogeneous 3-VM cluster (London DigitalOcean, all co-located)"
+
+devices:
+  - id: edge0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+
+  - id: mid0
+    type: mid_vm_calibrated
+    location: london_dc
+    components:
+      compute: true
+      mqtt_broker: true
+
+  - id: cloud0
+    type: cloud_vm_calibrated
+    location: london_dc
+    components:
+      compute: true
+      storage: true
+      mqtt_broker: true
+
+network:
+  - link: [edge0, mid0]
+    type: ethernet_1g
+  - link: [edge0, cloud0]
+    type: ethernet_1g
+  - link: [mid0, cloud0]
+    type: ethernet_1g

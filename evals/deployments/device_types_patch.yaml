@@ -1,0 +1,30 @@
+  # ========== CALIBRATED QPF EVALUATION DEVICES ==========
+  # Measured via calibrate_device.py (2000 iterations, 26 RIoTBench tasks)
+  # Phase 0 calibration — Feb 2026
+
+  edge_vm_calibrated:
+    description: "DigitalOcean Premium Intel 1-vCPU 1GB (London DC)"
+    cpu_speed: 1.99
+    memory_size: 1073741824     # 1GB
+    power_idle: 3.0
+    power_active: 5.0
+    power_transmit: 2.0
+    power_receive: 2.0
+
+  mid_vm_calibrated:
+    description: "DigitalOcean Premium Intel 2-vCPU 4GB (London DC)"
+    cpu_speed: 2.63
+    memory_size: 4294967296     # 4GB
+    power_idle: 5.0
+    power_active: 15.0
+    power_transmit: 3.0
+    power_receive: 3.0
+
+  ryzen_pc_calibrated:
+    description: "AMD Ryzen AI 9 365 (10c/20t, 32GB, Kampala)"
+    cpu_speed: 4.49
+    memory_size: 34359738368    # 32GB
+    power_idle: 15.0
+    power_active: 45.0
+    power_transmit: 4.0
+    power_receive: 4.0

@@ -1,0 +1,48 @@
+# Deployment configuration for 3-CAV evaluation - HETEROGENEOUS
+# Mixed hardware: Pi4, Nano, Xavier for different compute capabilities
+
+application:
+  name: eval_3cav_fusion
+  description: "3-CAV sensor fusion with heterogeneous hardware"
+
+devices:
+  - id: cav0
+    type: raspberry_pi_4
+    location: vehicle_0
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav1
+    type: jetson_nano
+    location: vehicle_1
+    components:
+      camera: true
+      lidar: true
+
+  - id: cav2
+    type: nvidia_jetson_xavier
+    location: vehicle_2
+    components:
+      camera: true
+      lidar: true
+
+  - id: rsu
+    type: server_x86
+    location: roadside
+    components:
+      display: true
+
+network:
+  - link: [cav0, rsu]
+    type: dsrc_v2i
+  - link: [cav1, rsu]
+    type: dsrc_v2i
+  - link: [cav2, rsu]
+    type: dsrc_v2i
+  - link: [cav0, cav1]
+    type: dsrc_v2v
+  - link: [cav1, cav2]
+    type: dsrc_v2v
+  - link: [cav0, cav2]
+    type: dsrc_v2v

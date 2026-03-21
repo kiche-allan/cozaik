@@ -1,0 +1,58 @@
+# Deployment Configuration: eval_train (ML Training Pipeline)
+#
+# Component-based device allocation:
+#   SQs declare required components via TTConstraint(components=[...])
+#   Devices declare available components below
+#   The mapper matches SQs to devices that satisfy all required components
+#
+# Placement flexibility:
+#   - "compute" SQs → device_a, device_b, device_c, device_d (4 options)
+#   - "storage" SQs → device_c, device_d (2 options)
+#   - "storage" + "mqtt_broker" SQs → device_d only (1 option)
+#   - Unconstrained SQs → all devices (4 options)
+
+application:
+  name: eval_train
+  description: "ML training pipeline with fork-join model training"
+
+devices:
+  - id: device_a
+    type: raspberry_pi_4
+    location: edge_site_0
+    components:
+      compute: true
+
+  - id: device_b
+    type: jetson_nano
+    location: edge_site_1
+    components:
+      compute: true
+
+  - id: device_c
+    type: intel_nuc_i5
+    location: fog_site
+    components:
+      compute: true
+      storage: true
+
+  - id: device_d
+    type: server_x86
+    location: datacenter
+    components:
+      compute: true
+      storage: true
+      mqtt_broker: true
+
+network:
+  - link: [device_a, device_b]
+    type: ethernet_1g
+  - link: [device_a, device_c]
+    type: wifi_good
+  - link: [device_b, device_c]
+    type: ethernet_1g
+  - link: [device_a, device_d]
+    type: internet_local
+  - link: [device_b, device_d]
+    type: internet_local
+  - link: [device_c, device_d]
+    type: ethernet_1g

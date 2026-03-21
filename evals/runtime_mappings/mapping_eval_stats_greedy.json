@@ -1,0 +1,60 @@
+{
+  "run_id": "eval_stats_greedy",
+  "workload": "eval_stats",
+  "strategy": "greedy",
+  "predicted_makespan_ms": 352.6583069022354,
+  "predicted_energy_joules": 11.900851691583089,
+  "trial_id": 1,
+  "seed": 1,
+  "mapping": {
+    "CONST-19": "cloud0",
+    "READ_TTCLOCK-20": "cloud0",
+    "CONST-21": "cloud0",
+    "CONST-22": "cloud0",
+    "CONST-27": "edge0",
+    "MULT-23": "cloud0",
+    "ADD-24": "cloud0",
+    "VALUES_TO_TTTIME-25": "cloud0",
+    "COPY_TTTIME-26": "cloud0",
+    "stats_spout-28": "edge0",
+    "parse_project-29": "edge0",
+    "bloom_filter_check-30": "edge0",
+    "kalman_filter-31": "cloud0",
+    "distinct_approx_count-34": "cloud0",
+    "second_order_moment-33": "cloud0",
+    "simple_linear_regression-32": "cloud0",
+    "mqtt_publish_stats-35": "cloud0",
+    "stats_sink-36": "cloud0"
+  },
+  "device_distribution": {
+    "cloud0": {
+      "sq_count": 14,
+      "sq_names": [
+        "CONST-19",
+        "READ_TTCLOCK-20",
+        "CONST-21",
+        "CONST-22",
+        "MULT-23",
+        "ADD-24",
+        "VALUES_TO_TTTIME-25",
+        "COPY_TTTIME-26",
+        "kalman_filter-31",
+        "distinct_approx_count-34",
+        "second_order_moment-33",
+        "simple_linear_regression-32",
+        "mqtt_publish_stats-35",
+        "stats_sink-36"
+      ]
+    },
+    "edge0": {
+      "sq_count": 4,
+      "sq_names": [
+        "CONST-27",
+        "stats_spout-28",
+        "parse_project-29",
+        "bloom_filter_check-30"
+      ]
+    }
+  },
+  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_stats_greedy.json"
+}

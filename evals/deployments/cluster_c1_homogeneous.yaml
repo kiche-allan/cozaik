@@ -1,0 +1,39 @@
+application:
+  name: qpf_evaluation_homogeneous
+  description: "Homogeneous 3-VM cluster (all identical edge_vm_calibrated)"
+
+devices:
+  - id: edge0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: mid0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+  - id: cloud0
+    type: edge_vm_calibrated
+    location: london_dc
+    components:
+      sensor_interface: true
+      compute: true
+      mqtt_broker: true
+      storage: true
+
+network:
+  - link: [edge0, mid0]
+    type: ethernet_1g
+  - link: [edge0, cloud0]
+    type: ethernet_1g
+  - link: [mid0, cloud0]
+    type: ethernet_1g

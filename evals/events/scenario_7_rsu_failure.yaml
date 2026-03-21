@@ -1,0 +1,26 @@
+# Scenario 7: RSU (Critical Node) Failure
+# =========================================
+# Tests handling of critical infrastructure failure.
+#
+# RSU typically hosts global_fusion and write_to_file tasks.
+# These are critical path tasks that all CAV outputs depend on.
+#
+# Expected behavior:
+# 1. At 5s: RSU fails
+# 2. System detects critical path disruption
+# 3. global_fusion and write_to_file must be remapped
+# 4. Some CAV must absorb RSU workload
+#
+# Success criteria:
+# - Critical tasks successfully remapped
+# - Makespan may increase significantly (CAVs are slower)
+# - No deadlock (execution continues)
+# - System adapts despite losing central coordinator
+
+scenario: rsu_failure
+description: "Kill RSU at 5s - critical path disruption test"
+
+events:
+  - time: 5.0
+    type: failure
+    device: rsu

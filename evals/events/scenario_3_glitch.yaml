@@ -1,0 +1,24 @@
+# Scenario 3: False Positive (Network Glitch)
+# ============================================
+# Tests the system's stability tracking to avoid unnecessary adaptations.
+#
+# Expected behavior:
+# 1. At 5s: cav1 misses heartbeats for 2s (network glitch)
+# 2. System transitions cav1 to SUSPECTED state
+# 3. Within grace period, cav1 resumes heartbeats
+# 4. System transitions cav1 back to ACTIVE without remapping
+#
+# Success criteria:
+# - 0 adaptation events (no unnecessary remapping)
+# - 0 false positives ideally (system correctly identified glitch)
+# - Makespan unchanged from baseline
+# - Device state: ACTIVE -> SUSPECTED -> ACTIVE
+
+scenario: false_positive_glitch
+description: "Block heartbeats for 2s, device still alive - tests stability tracking"
+
+events:
+  - time: 5.0
+    type: glitch
+    device: cav1
+    duration: 2.0   # seconds of heartbeat suppression
