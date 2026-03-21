@@ -1,0 +1,11 @@
+ttp-program ::= ( 'ImportFrom' | sq-def )* graph-def
+sq-def ::= '@SQify' function-def
+graph-def ::= '@GRAPHify' function-def
+function-def ::= 'def' 'Name' arglist ':' body
+body ::= ( context-stmt | assignment )* 'return' expression
+context-stmt ::= 'with' context-expr ':' body | 'with' context-expr 'as' 'Name' ':' body
+context-expr ::= 'TTClock' arglist | 'TTPlanB' arglist | 'TTDeadline' arglist
+assignment ::= 'Name' '=' expression
+expression ::= 'IfExp' | 'Call' | 'UnaryOp' | 'BinOp' | 'BoolOp'
+arglist ::= '(' arg* ')'
+arg ::= 'Name' | expression
