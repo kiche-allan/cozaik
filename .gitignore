@@ -4,9 +4,6 @@
 doc/~$TTTimes.xlsx
 
 output/*
-output_app1/
-output_app2/
-output_branch/
 docs/build
 .DS_Store
 

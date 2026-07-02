@@ -204,10 +204,7 @@ class CombinedGraph:
                     for dest_sq, port_num in ipp_to_sq[data_name]:
                         if dest_sq.sq_name != sq.sq_name:
                             G.add_edge(sq.sq_name, dest_sq.sq_name)
-
-        for edge in self.sspg_edges:
-            G.add_edge(edge['source'], edge['target'])
-
+        
         self._cached_dag = G
         return G
     
@@ -694,8 +691,7 @@ def combine(*graphs, app_ids: Optional[List[str]] = None,
         
         # Add split edges
         for src_sq in prefixed_sources:
-            original_name = src_sq.sq_name[len(app_id) + 2:]
-            edge_name = f"su__{app_id}__{original_name}"
+            edge_name = f"su__{app_id}__{src_sq.sq_name}"
             combined.super_trigger.add_output_port(edge_name)
             combined.sspg_edges.append({
                 'type': SSPGEdgeType.SU,
@@ -715,8 +711,7 @@ def combine(*graphs, app_ids: Optional[List[str]] = None,
     
     for app_id, info in combined.subgraph_info.items():
         for sink_sq in info['sinks']:
-            original_name = sink_sq.sq_name[len(app_id) + 2:]
-            edge_name = f"ju__{app_id}__{original_name}"
+            edge_name = f"ju__{app_id}__{sink_sq.sq_name}"
             combined.barrier_join.add_input_port(edge_name)
             combined.sspg_edges.append({
                 'type': SSPGEdgeType.JU,

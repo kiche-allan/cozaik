@@ -1,7 +1,0 @@
-devices:
-  - id: edge0
-    type: raspberry_pi_4
-  - id: server0
-    type: server_x86
-
-network: {}
