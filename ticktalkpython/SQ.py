@@ -555,7 +555,7 @@ class TTSQ:
                         f'clock {clock_var_name} does not appear to exist')
             elif key == 'TTPeriod':
                 assert isinstance(
-                    kwargs[key].n, int
+                    kwargs[key].value, int
                 ), 'TTPeriod keyword must be an integer and constant value'
                 self.firing_rule_kwargs[
                     'streaming_period'] = get_value_from_ast_keyword(
@@ -569,21 +569,21 @@ class TTSQ:
                             'streaming_period']
             elif key == 'TTPhase':
                 assert isinstance(
-                    kwargs[key].n, int
+                    kwargs[key].value, int
                 ), 'TTPhase keyword must be an integer and constant value'
                 self.firing_rule_kwargs[
                     'streaming_phase'] = get_value_from_ast_keyword(
                         kwargs[key])
             elif key == 'TTDataIntervalWidth':
                 assert isinstance(
-                    kwargs[key].n, int
+                    kwargs[key].value, int
                 ), 'TTDataIntervalWidth keyword must be an integer and constant value'
                 self.execution_kwargs[
                     'TTDataIntervalWidth'] = get_value_from_ast_keyword(
                         kwargs[key])
             elif key == 'TTFirstInstanceDelay':
                 assert isinstance(
-                    kwargs[key].n, int
+                    kwargs[key].value, int
                 ), 'TTFirstInstanceDelay keyword must be an integer and constant value'
                 self.firing_rule_kwargs[
                     'TTFirstInstanceDelay'] = get_value_from_ast_keyword(
@@ -720,9 +720,7 @@ class TTSQ:
 
 
 def get_value_from_ast_keyword(keyword):
-    if isinstance(keyword, ast.Num):
-        return keyword.n
-    elif isinstance(keyword, ast.Constant):
+    if isinstance(keyword, ast.Constant):
         return keyword.value
     elif hasattr(keyword, 'value'):
         return keyword.value

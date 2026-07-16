@@ -22,16 +22,20 @@
 
 set -e  # Exit on error
 
+# Avoid UnicodeEncodeError from Python scripts printing box-drawing
+# characters on Windows consoles using a non-UTF-8 codepage.
+export PYTHONIOENCODING=utf-8
+
 # ======================== CONFIGURATION ========================
 SSH_KEY="$HOME/.ssh/ttpython_cluster"
 SSH_OPTS="-i $SSH_KEY -o StrictHostKeyChecking=no -o ConnectTimeout=10"
 
-CLOUD0_IP="<CLOUD0_IP>"
-MID0_IP="<MID0_IP>"
-EDGE0_IP="<EDGE0_IP>"
+CLOUD0_IP="188.166.146.111"
+MID0_IP="159.65.24.36"
+EDGE0_IP="159.65.31.18"
 
 DEPLOYMENT="evals/deployments/cluster_c2_heterogeneous.yaml"
-WORKLOADS="eval_etl eval_stats eval_pred eval_train eval_city eval_taxi eval_grid eval_fit"
+WORKLOADS="eval_etl eval_stats eval_pred eval_train"
 STRATEGIES="qpf_makespan static random greedy"
 
 RTM_TIMEOUT=180      # Total timeout for RTM (seconds)
@@ -98,7 +102,7 @@ compile_workloads() {
     log "========== STEP 1: Compiling all workloads =========="
     for WL in $WORKLOADS; do
         log "  Compiling $WL..."
-        python compile.py evals/workloads/${WL}.py -o ./output/ -g \
+        python compile.py evals/workloads/${WL}.py -o ./output/ \
             --deployment $DEPLOYMENT 2>&1 | grep -E "SQs analyzed|Compilation successful|instances"
     done
     log "Compilation complete."
@@ -157,15 +161,16 @@ push_to_vms() {
     
     for IP in $CLOUD0_IP $MID0_IP $EDGE0_IP; do
         log "  Pushing to $IP..."
-        
-        # Push core code
-        rsync -avz --quiet -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-            --exclude='*.pdf' --exclude='*.docx' --exclude='*.pickle' \
-            --exclude='*.png' --exclude='riot/' --exclude='.git/' \
-            --exclude='__pycache__/' --exclude='runtime_logs*/' \
-            --exclude='evals/results/' \
-            ./ root@$IP:~/ttpython/
-        
+
+        # Push core code (tar over ssh — rsync unavailable in this shell)
+        ssh_cmd $IP "mkdir -p ~/ttpython"
+        tar --exclude='*.pdf' --exclude='*.docx' --exclude='*.pickle' \
+            --exclude='*.png' --exclude='riot' --exclude='.git' \
+            --exclude='__pycache__' --exclude='runtime_logs*' \
+            --exclude='evals/results' --exclude='Lib' --exclude='Scripts' \
+            --exclude='share' -cf - . \
+            | ssh $SSH_OPTS root@$IP "tar -xf - -C ~/ttpython"
+
         # Ensure riotbench_provider is at root level
         scp_to $IP "evals/workloads/riotbench_provider.py" "~/ttpython/riotbench_provider.py"
         
@@ -203,7 +208,7 @@ run_single_deployment() {
         return
     fi
     
-    local predicted_ms=$(python3 -c "
+    local predicted_ms=$(python -c "
 import json
 with open('$mapping_file') as f:
     d = json.load(f)
@@ -235,7 +240,7 @@ print(f\"{d.get('predicted_makespan_ms', 0):.1f}\")
         cd ~/ttpython
         export TTPYTHON_RUN_LABEL=${run_label}
         export TTPYTHON_PREDICTED_MS=${predicted_ms}
-        python3 runrtm.py output/${workload}.pickle 9000 \
+        echo '' | python3 runrtm.py output/${workload}.pickle 9000 \
             --ip ${CLOUD0_IP} --timeout ${RTM_TIMEOUT} -s ${STREAM_TIME} \
             --mapping mappings/mapping_${run_label}.json \
             --run-label ${run_label} \
@@ -367,7 +372,7 @@ consolidate_results() {
     # Generate summary
     log "Generating summary..."
     
-    python3 << PYEOF
+    python << PYEOF
 import json, os, statistics
 
 logs_dir = "$LOGS_DIR"

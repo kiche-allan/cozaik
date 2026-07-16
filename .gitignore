@@ -25,6 +25,7 @@ output_constraint/
 output_deadline/
 output_eval/
 runtime_logs/
+runtime_logs_automated/
 evals/results/
 
 settings.json

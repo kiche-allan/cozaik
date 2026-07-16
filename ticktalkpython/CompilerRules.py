@@ -424,16 +424,13 @@ class TTGraphCompilationVisitor(ast.NodeVisitor):
 
                 # if expr required for 3.7 ast parsing
                 ens_name_list = (lambda l: l if len(l) == 1 else [])([
-                    Query.TTQCEnsembleName(k.value.s if isinstance(
-                        k.value, ast.Str) else k.value.value) for k in kwargs
+                    Query.TTQCEnsembleName(k.value.value) for k in kwargs
                     if k.arg == 'name'
                 ])
 
                 # assumes args are string constants
-                # if expr required for 3.7 ast parsing
                 name_query_list = [
-                    Query.TTQCComponentName(
-                        c.s if isinstance(c, ast.Str) else c.value)
+                    Query.TTQCComponentName(c.value)
                     for c in component_list
                 ]
                 constraints = name_query_list + ens_name_list
@@ -699,8 +696,7 @@ class TTGraphCompilationVisitor(ast.NodeVisitor):
         # special named functions create a subgraph of execution
         if func_name == 'TTSingleRunTimeout':
             timeout_node = self.scrape_kwarg("TTTimeout", node)
-            timeout = timeout_node.n if isinstance(
-                timeout_node, ast.Num) else timeout_node.value
+            timeout = timeout_node.value
             if not type(timeout) is int:
                 raise TTSyntaxError(f"Timeout must be an integer.",
                                     node.lineno, self.source_line(node.lineno),
@@ -1132,30 +1128,22 @@ class TTGraphCompilationVisitor(ast.NodeVisitor):
             if isinstance(deadline_expr.op, ast.Add):
                 # Check right operand for constant
                 right = deadline_expr.right
-                if isinstance(right, ast.Num):
-                    return right.n
-                elif isinstance(right, ast.Constant) and isinstance(right.value, (int, float)):
+                if isinstance(right, ast.Constant) and isinstance(right.value, (int, float)):
                     return int(right.value)
-                
+
                 # Check left operand for constant (commutative)
                 left = deadline_expr.left
-                if isinstance(left, ast.Num):
-                    return left.n
-                elif isinstance(left, ast.Constant) and isinstance(left.value, (int, float)):
+                if isinstance(left, ast.Constant) and isinstance(left.value, (int, float)):
                     return int(left.value)
-            
+
             elif isinstance(deadline_expr.op, ast.Sub):
                 # Pattern: some_time - <constant> (deadline before reference point)
                 right = deadline_expr.right
-                if isinstance(right, ast.Num):
-                    return -right.n  # Negative indicates "before" the reference
-                elif isinstance(right, ast.Constant) and isinstance(right.value, (int, float)):
+                if isinstance(right, ast.Constant) and isinstance(right.value, (int, float)):
                     return -int(right.value)
-        
+
         # Pattern 2: Direct constant - e.g., TTTimeDeadline=5000000
-        if isinstance(deadline_expr, ast.Num):
-            return deadline_expr.n
-        elif isinstance(deadline_expr, ast.Constant) and isinstance(deadline_expr.value, (int, float)):
+        if isinstance(deadline_expr, ast.Constant) and isinstance(deadline_expr.value, (int, float)):
             return int(deadline_expr.value)
         
         # Pattern 3: Name referencing a constant (would need symbol table lookup)

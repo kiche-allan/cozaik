@@ -3,7 +3,7 @@
   "workload": "eval_train",
   "strategy": "qpf_makespan",
   "predicted_makespan_ms": 224.14435473887818,
-  "predicted_energy_joules": 10.800769159899517,
+  "predicted_energy_joules": 6.865953688806993,
   "trial_id": 28,
   "seed": 28,
   "mapping": {
@@ -59,5 +59,5 @@
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_train_qpf_makespan.json"
+  "extracted_from": "evals/results/2026-07-16_14-18-45_placement_quality\\eval_train_qpf_makespan.json"
 }

@@ -3,7 +3,7 @@
   "workload": "eval_pred",
   "strategy": "static",
   "predicted_makespan_ms": 452.08289649712316,
-  "predicted_energy_joules": 13.350965357511773,
+  "predicted_energy_joules": 5.680078918644892,
   "trial_id": 1,
   "seed": 1,
   "mapping": {
@@ -85,5 +85,5 @@
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_pred_static.json"
+  "extracted_from": "evals/results/2026-07-16_14-18-45_placement_quality\\eval_pred_static.json"
 }

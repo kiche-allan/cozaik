@@ -3,7 +3,7 @@
   "workload": "eval_etl",
   "strategy": "greedy",
   "predicted_makespan_ms": 287.7182314915163,
-  "predicted_energy_joules": 10.311007587964449,
+  "predicted_energy_joules": 6.7133255571042305,
   "trial_id": 1,
   "seed": 1,
   "mapping": {
@@ -58,5 +58,5 @@
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_etl_greedy.json"
+  "extracted_from": "evals/results/2026-07-16_14-18-45_placement_quality\\eval_etl_greedy.json"
 }

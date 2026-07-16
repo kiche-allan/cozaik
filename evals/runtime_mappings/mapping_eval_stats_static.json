@@ -2,8 +2,8 @@
   "run_id": "eval_stats_static",
   "workload": "eval_stats",
   "strategy": "static",
-  "predicted_makespan_ms": 542.5,
-  "predicted_energy_joules": 3.2550000000000003,
+  "predicted_makespan_ms": 510.9928804326812,
+  "predicted_energy_joules": 3.3537287851415423,
   "trial_id": 1,
   "seed": 1,
   "mapping": {
@@ -23,12 +23,12 @@
     "simple_linear_regression-32": "edge0",
     "second_order_moment-33": "edge0",
     "distinct_approx_count-34": "edge0",
-    "mqtt_publish_stats-35": "edge0",
-    "stats_sink-36": "edge0"
+    "mqtt_publish_stats-35": "mid0",
+    "stats_sink-36": "mid0"
   },
   "device_distribution": {
     "edge0": {
-      "sq_count": 18,
+      "sq_count": 16,
       "sq_names": [
         "CONST-19",
         "READ_TTCLOCK-20",
@@ -45,11 +45,16 @@
         "kalman_filter-31",
         "simple_linear_regression-32",
         "second_order_moment-33",
-        "distinct_approx_count-34",
+        "distinct_approx_count-34"
+      ]
+    },
+    "mid0": {
+      "sq_count": 2,
+      "sq_names": [
         "mqtt_publish_stats-35",
         "stats_sink-36"
       ]
     }
   },
-  "extracted_from": "evals/results/2026-07-09_11-27-24_placement_quality\\eval_stats_static.json"
+  "extracted_from": "evals/results/2026-07-16_14-18-45_placement_quality\\eval_stats_static.json"
 }

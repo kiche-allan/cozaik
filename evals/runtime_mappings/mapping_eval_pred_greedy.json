@@ -3,7 +3,7 @@
   "workload": "eval_pred",
   "strategy": "greedy",
   "predicted_makespan_ms": 325.8865248226951,
-  "predicted_energy_joules": 14.489544572452106,
+  "predicted_energy_joules": 9.560242324098754,
   "trial_id": 1,
   "seed": 1,
   "mapping": {
@@ -26,14 +26,14 @@
     "COPY_TTTIME-45": "cloud0",
     "COPY_TTTIME-51": "cloud0",
     "pred_data_spout-59": "edge0",
-    "mqtt_subscribe_spout-56": "cloud0",
     "mqtt_subscribe_spout-53": "cloud0",
+    "mqtt_subscribe_spout-56": "cloud0",
     "senml_parse_pred-60": "edge0",
-    "blob_download-57": "cloud0",
     "blob_download-54": "cloud0",
+    "blob_download-57": "cloud0",
     "block_window_average-63": "cloud0",
-    "linear_regression_predict-62": "cloud0",
     "decision_tree_classify-61": "cloud0",
+    "linear_regression_predict-62": "cloud0",
     "error_estimation-64": "cloud0",
     "mqtt_publish_pred-65": "cloud0",
     "pred_sink-66": "cloud0"
@@ -59,13 +59,13 @@
         "VALUES_TO_TTTIME-50",
         "COPY_TTTIME-45",
         "COPY_TTTIME-51",
-        "mqtt_subscribe_spout-56",
         "mqtt_subscribe_spout-53",
-        "blob_download-57",
+        "mqtt_subscribe_spout-56",
         "blob_download-54",
+        "blob_download-57",
         "block_window_average-63",
-        "linear_regression_predict-62",
         "decision_tree_classify-61",
+        "linear_regression_predict-62",
         "error_estimation-64",
         "mqtt_publish_pred-65",
         "pred_sink-66"
@@ -80,5 +80,5 @@
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_pred_greedy.json"
+  "extracted_from": "evals/results/2026-07-16_14-18-45_placement_quality\\eval_pred_greedy.json"
 }

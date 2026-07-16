@@ -173,9 +173,9 @@ device_types:
     power_receive: 0.5
 
   mid_vm_calibrated:
-    description: "DigitalOcean 2-vCPU 4GB London (calibrated, median of 5 runs)"
+    description: "DigitalOcean 1-vCPU 2GB London (calibrated, median of 5 runs)"
     cpu_speed: 2.64
-    memory_size: 4294967296
+    memory_size: 2063581184
     power_idle: 5.0
     power_active: 12.0
     power_transmit: 0.5
@@ -191,9 +191,9 @@ device_types:
     power_receive: 5.0
 
   cloud_vm_calibrated:
-    description: "DigitalOcean 4-vCPU Dedicated CPU London (calibrated, median of 5 runs)"
+    description: "DigitalOcean 2-vCPU Dedicated CPU 2GB London (calibrated, median of 5 runs)"
     cpu_speed: 2.82
-    memory_size: 8589934592
+    memory_size: 2063220736
     power_idle: 12.0
     power_active: 28.0
     power_transmit: 0.5
