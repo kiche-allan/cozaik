@@ -299,7 +299,7 @@ def analyze_results(logs_dir: str,
         if len(wl_runs) > 1:
             print(f"\n  {wl} — Strategy Ranking (by actual median latency):")
             for i, run in enumerate(sorted(wl_runs, key=lambda r: r['actual']['median_ms'])):
-                marker = " ← BEST" if i == 0 else ""
+                marker = " <- BEST" if i == 0 else ""
                 print(f"    {i+1}. {run['strategy']}: {run['actual']['median_ms']:.1f}ms "
                       f"(predicted: {run['predicted_makespan_ms']:.1f}ms){marker}")
 

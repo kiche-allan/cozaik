@@ -13,6 +13,19 @@ docs/build
 .idea/*
 .ipynb_checkpoints/*
 venv/*
+Lib/
+Scripts/
+share/
+pyvenv.cfg
+
+output_app1/
+output_app2/
+output_branch/
+output_constraint/
+output_deadline/
+output_eval/
+runtime_logs/
+evals/results/
 
 settings.json
 

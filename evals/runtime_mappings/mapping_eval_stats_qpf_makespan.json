@@ -2,64 +2,89 @@
   "run_id": "eval_stats_qpf_makespan",
   "workload": "eval_stats",
   "strategy": "qpf_makespan",
-  "predicted_makespan_ms": 265.74228140642623,
-  "predicted_energy_joules": 11.245047411212171,
-  "trial_id": 29,
-  "seed": 29,
+  "predicted_makespan_ms": 355.46268869965473,
+  "predicted_energy_joules": 14.19720877289057,
+  "trial_id": 15,
+  "seed": 15,
   "mapping": {
-    "CONST-19": "mid0",
-    "READ_TTCLOCK-20": "cloud0",
-    "CONST-21": "cloud0",
+    "CONST-19": "nuc0",
+    "READ_TTCLOCK-20": "nuc0",
+    "CONST-21": "nuc0",
     "CONST-22": "mid0",
-    "MULT-23": "mid0",
-    "ADD-24": "mid0",
-    "VALUES_TO_TTTIME-25": "mid0",
-    "COPY_TTTIME-26": "mid0",
-    "CONST-27": "edge0",
-    "stats_spout-28": "edge0",
-    "parse_project-29": "edge0",
-    "bloom_filter_check-30": "edge0",
-    "kalman_filter-31": "cloud0",
-    "simple_linear_regression-32": "cloud0",
-    "second_order_moment-33": "edge0",
-    "distinct_approx_count-34": "mid0",
-    "mqtt_publish_stats-35": "cloud0",
-    "stats_sink-36": "cloud0"
+    "MULT-23": "edge2",
+    "ADD-24": "edge1",
+    "VALUES_TO_TTTIME-25": "edge1",
+    "COPY_TTTIME-26": "server0",
+    "CONST-27": "pc0",
+    "stats_spout-28": "server0",
+    "parse_project-29": "mid1",
+    "bloom_filter_check-30": "mid1",
+    "kalman_filter-31": "mid1",
+    "simple_linear_regression-32": "mid1",
+    "second_order_moment-33": "nuc0",
+    "distinct_approx_count-34": "server0",
+    "mqtt_publish_stats-35": "mid1",
+    "stats_sink-36": "edge0"
   },
   "device_distribution": {
-    "mid0": {
-      "sq_count": 7,
+    "nuc0": {
+      "sq_count": 4,
       "sq_names": [
         "CONST-19",
-        "CONST-22",
-        "MULT-23",
+        "READ_TTCLOCK-20",
+        "CONST-21",
+        "second_order_moment-33"
+      ]
+    },
+    "mid0": {
+      "sq_count": 1,
+      "sq_names": [
+        "CONST-22"
+      ]
+    },
+    "edge2": {
+      "sq_count": 1,
+      "sq_names": [
+        "MULT-23"
+      ]
+    },
+    "edge1": {
+      "sq_count": 2,
+      "sq_names": [
         "ADD-24",
-        "VALUES_TO_TTTIME-25",
+        "VALUES_TO_TTTIME-25"
+      ]
+    },
+    "server0": {
+      "sq_count": 3,
+      "sq_names": [
         "COPY_TTTIME-26",
+        "stats_spout-28",
         "distinct_approx_count-34"
       ]
     },
-    "cloud0": {
-      "sq_count": 6,
+    "pc0": {
+      "sq_count": 1,
       "sq_names": [
-        "READ_TTCLOCK-20",
-        "CONST-21",
+        "CONST-27"
+      ]
+    },
+    "mid1": {
+      "sq_count": 5,
+      "sq_names": [
+        "parse_project-29",
+        "bloom_filter_check-30",
         "kalman_filter-31",
         "simple_linear_regression-32",
-        "mqtt_publish_stats-35",
-        "stats_sink-36"
+        "mqtt_publish_stats-35"
       ]
     },
     "edge0": {
-      "sq_count": 5,
+      "sq_count": 1,
       "sq_names": [
-        "CONST-27",
-        "stats_spout-28",
-        "parse_project-29",
-        "bloom_filter_check-30",
-        "second_order_moment-33"
+        "stats_sink-36"
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_stats_qpf_makespan.json"
+  "extracted_from": "evals/results/2026-07-09_11-27-24_placement_quality\\eval_stats_qpf_makespan.json"
 }

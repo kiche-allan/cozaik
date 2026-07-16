@@ -2382,19 +2382,22 @@ class TTRuntimeManagerProcess():
         
         # Initialize device identity and state tracking
         self._initialize_device_identity_tracking(device_name, ensemble_info)
-        
-        # Send DeviceWelcome with synchronized timing configuration
-        self._send_device_welcome(ensemble_info)
-        
+
         # Assess optimization benefit using QPF
         benefit = self._assess_new_device_optimization_benefit(ensemble_info)
-        
-        # Conservative integration decision
+
+        # Conservative integration decision. This must run before sending
+        # DeviceWelcome, since both integration paths add the device's
+        # routing-table entry that DeviceWelcome's ForwardNetworkMessage
+        # relies on to resolve the device's network address.
         if self._should_integrate_device(device_name, benefit):
             self._integrate_new_device(ensemble_info, benefit)
         else:
             self._add_to_available_devices(ensemble_info)
-        
+
+        # Send DeviceWelcome with synchronized timing configuration
+        self._send_device_welcome(ensemble_info)
+
         return True
     
     def _verify_device_matches_spec(self, ensemble_info, expected_spec):

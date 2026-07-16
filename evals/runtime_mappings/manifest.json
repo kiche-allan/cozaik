@@ -1,262 +1,38 @@
 {
-  "extracted_at": "2026-03-14T12:00:34.847543",
-  "source_dir": "evals/results/2026-03-14_11-55-16_placement_quality",
+  "extracted_at": "2026-07-14T23:05:49.674531",
+  "source_dir": "evals/results/2026-07-09_11-27-24_placement_quality",
   "runs": [
     {
       "run_id": "eval_etl_qpf_makespan",
       "workload": "eval_etl",
       "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_etl_qpf_makespan.json",
-      "predicted_makespan_ms": 290.6842202884215,
+      "mapping_file": "evals/runtime_mappings\\mapping_eval_etl_qpf_makespan.json",
+      "predicted_makespan_ms": 436.39993587111627,
       "num_sqs": 19
     },
     {
       "run_id": "eval_etl_static",
       "workload": "eval_etl",
       "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_etl_static.json",
-      "predicted_makespan_ms": 442.08644519217495,
-      "num_sqs": 19
-    },
-    {
-      "run_id": "eval_etl_random",
-      "workload": "eval_etl",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_etl_random.json",
-      "predicted_makespan_ms": 288.93339447640966,
-      "num_sqs": 19
-    },
-    {
-      "run_id": "eval_etl_greedy",
-      "workload": "eval_etl",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_etl_greedy.json",
-      "predicted_makespan_ms": 287.7182314915163,
+      "mapping_file": "evals/runtime_mappings\\mapping_eval_etl_static.json",
+      "predicted_makespan_ms": 466.4556962025316,
       "num_sqs": 19
     },
     {
       "run_id": "eval_stats_qpf_makespan",
       "workload": "eval_stats",
       "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_stats_qpf_makespan.json",
-      "predicted_makespan_ms": 265.74228140642623,
+      "mapping_file": "evals/runtime_mappings\\mapping_eval_stats_qpf_makespan.json",
+      "predicted_makespan_ms": 355.46268869965473,
       "num_sqs": 18
     },
     {
       "run_id": "eval_stats_static",
       "workload": "eval_stats",
       "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_stats_static.json",
-      "predicted_makespan_ms": 510.9928804326812,
+      "mapping_file": "evals/runtime_mappings\\mapping_eval_stats_static.json",
+      "predicted_makespan_ms": 542.5,
       "num_sqs": 18
-    },
-    {
-      "run_id": "eval_stats_random",
-      "workload": "eval_stats",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_stats_random.json",
-      "predicted_makespan_ms": 334.4447581127733,
-      "num_sqs": 18
-    },
-    {
-      "run_id": "eval_stats_greedy",
-      "workload": "eval_stats",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_stats_greedy.json",
-      "predicted_makespan_ms": 352.6583069022354,
-      "num_sqs": 18
-    },
-    {
-      "run_id": "eval_pred_qpf_makespan",
-      "workload": "eval_pred",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_pred_qpf_makespan.json",
-      "predicted_makespan_ms": 231.2458011311608,
-      "num_sqs": 30
-    },
-    {
-      "run_id": "eval_pred_static",
-      "workload": "eval_pred",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_pred_static.json",
-      "predicted_makespan_ms": 452.08289649712316,
-      "num_sqs": 30
-    },
-    {
-      "run_id": "eval_pred_random",
-      "workload": "eval_pred",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_pred_random.json",
-      "predicted_makespan_ms": 332.5075197690669,
-      "num_sqs": 30
-    },
-    {
-      "run_id": "eval_pred_greedy",
-      "workload": "eval_pred",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_pred_greedy.json",
-      "predicted_makespan_ms": 325.8865248226951,
-      "num_sqs": 30
-    },
-    {
-      "run_id": "eval_train_qpf_makespan",
-      "workload": "eval_train",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_train_qpf_makespan.json",
-      "predicted_makespan_ms": 224.14435473887818,
-      "num_sqs": 17
-    },
-    {
-      "run_id": "eval_train_static",
-      "workload": "eval_train",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_train_static.json",
-      "predicted_makespan_ms": 418.0051004901697,
-      "num_sqs": 17
-    },
-    {
-      "run_id": "eval_train_random",
-      "workload": "eval_train",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_train_random.json",
-      "predicted_makespan_ms": 311.49021265822785,
-      "num_sqs": 17
-    },
-    {
-      "run_id": "eval_train_greedy",
-      "workload": "eval_train",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_train_greedy.json",
-      "predicted_makespan_ms": 282.4645390070922,
-      "num_sqs": 17
-    },
-    {
-      "run_id": "eval_city_qpf_makespan",
-      "workload": "eval_city",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_city_qpf_makespan.json",
-      "predicted_makespan_ms": 542.5329378807628,
-      "num_sqs": 55
-    },
-    {
-      "run_id": "eval_city_static",
-      "workload": "eval_city",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_city_static.json",
-      "predicted_makespan_ms": 1445.9574857506054,
-      "num_sqs": 55
-    },
-    {
-      "run_id": "eval_city_random",
-      "workload": "eval_city",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_city_random.json",
-      "predicted_makespan_ms": 1158.3325777153816,
-      "num_sqs": 55
-    },
-    {
-      "run_id": "eval_city_greedy",
-      "workload": "eval_city",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_city_greedy.json",
-      "predicted_makespan_ms": 861.6132444147593,
-      "num_sqs": 55
-    },
-    {
-      "run_id": "eval_taxi_qpf_makespan",
-      "workload": "eval_taxi",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_taxi_qpf_makespan.json",
-      "predicted_makespan_ms": 472.9968663399522,
-      "num_sqs": 44
-    },
-    {
-      "run_id": "eval_taxi_static",
-      "workload": "eval_taxi",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_taxi_static.json",
-      "predicted_makespan_ms": 844.6670886203269,
-      "num_sqs": 44
-    },
-    {
-      "run_id": "eval_taxi_random",
-      "workload": "eval_taxi",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_taxi_random.json",
-      "predicted_makespan_ms": 671.2629399309551,
-      "num_sqs": 44
-    },
-    {
-      "run_id": "eval_taxi_greedy",
-      "workload": "eval_taxi",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_taxi_greedy.json",
-      "predicted_makespan_ms": 631.6159376547266,
-      "num_sqs": 44
-    },
-    {
-      "run_id": "eval_grid_qpf_makespan",
-      "workload": "eval_grid",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_grid_qpf_makespan.json",
-      "predicted_makespan_ms": 466.54006902633665,
-      "num_sqs": 47
-    },
-    {
-      "run_id": "eval_grid_static",
-      "workload": "eval_grid",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_grid_static.json",
-      "predicted_makespan_ms": 1116.2773246709598,
-      "num_sqs": 47
-    },
-    {
-      "run_id": "eval_grid_random",
-      "workload": "eval_grid",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_grid_random.json",
-      "predicted_makespan_ms": 764.8424853855008,
-      "num_sqs": 47
-    },
-    {
-      "run_id": "eval_grid_greedy",
-      "workload": "eval_grid",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_grid_greedy.json",
-      "predicted_makespan_ms": 724.231746973337,
-      "num_sqs": 47
-    },
-    {
-      "run_id": "eval_fit_qpf_makespan",
-      "workload": "eval_fit",
-      "strategy": "qpf_makespan",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_fit_qpf_makespan.json",
-      "predicted_makespan_ms": 491.71628840310456,
-      "num_sqs": 51
-    },
-    {
-      "run_id": "eval_fit_static",
-      "workload": "eval_fit",
-      "strategy": "static",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_fit_static.json",
-      "predicted_makespan_ms": 1228.1922182879805,
-      "num_sqs": 51
-    },
-    {
-      "run_id": "eval_fit_random",
-      "workload": "eval_fit",
-      "strategy": "random",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_fit_random.json",
-      "predicted_makespan_ms": 852.115212658228,
-      "num_sqs": 51
-    },
-    {
-      "run_id": "eval_fit_greedy",
-      "workload": "eval_fit",
-      "strategy": "greedy",
-      "mapping_file": "evals/runtime_mappings/mapping_eval_fit_greedy.json",
-      "predicted_makespan_ms": 800.9244482930245,
-      "num_sqs": 51
     }
   ]
 }

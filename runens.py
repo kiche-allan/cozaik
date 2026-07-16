@@ -19,6 +19,7 @@
 # DEALINGS IN THE SOFTWARE.
 
 import argparse
+import os
 
 from ticktalkpython import DebugLogger
 from ticktalkpython import Ensemble
@@ -98,6 +99,14 @@ def main():
         default=None,
         help='device type from device_types.yaml (e.g., raspberry_pi_4, jetson_nano). '
              'Reports to RuntimeManager for deployment spec verification.')
+    parser.add_argument(
+        '--run-label',
+        type=str,
+        default=None,
+        help='Label for this run (e.g. eval_etl_qpf_makespan), matching the '
+             'value passed to runrtm.py --run-label. Exported as '
+             'TTPYTHON_RUN_LABEL so sink SQs running on this device log it '
+             'for runtime_validation.py to match against analytical results.')
 
     args = parser.parse_args()
     name = args.name
@@ -109,6 +118,9 @@ def main():
     is_debug = args.debug
     log_file_name = args.output
     device_type = args.device_type
+
+    if args.run_label:
+        os.environ['TTPYTHON_RUN_LABEL'] = args.run_label
 
     DebugLogger.set_base_logger_info()
     if is_debug:

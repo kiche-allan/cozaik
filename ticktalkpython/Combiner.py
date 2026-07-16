@@ -335,6 +335,9 @@ class CombinedGraph:
                             for dest_sq, port_num in ipp_to_sq[data_name]:
                                 if dest_sq.sq_name != sq.sq_name:
                                     G.add_edge(sq.sq_name, dest_sq.sq_name)
+                for edge in self.sspg_edges:
+                    G.add_edge(edge["source"], edge["target"])
+
                 self._cached_dag = G
                 return G
         

@@ -6,38 +6,38 @@
 # ============================================================================
 
 # ======================== CLUSTER IPS ========================
-# edge0:   <EDGE0_IP>  (1 vCPU, 1GB,  London, Shared)
-# mid0:    <MID0_IP>  (2 vCPU, 4GB,  London, Shared)
-# cloud0:  <CLOUD0_IP> (4 vCPU, 8GB,  London, Dedicated CPU-Optimized)
+# edge0:   159.65.31.18  (1 vCPU, 1GB,  London, Shared)
+# mid0:    159.65.24.36  (2 vCPU, 4GB,  London, Shared)
+# cloud0:  188.166.146.111 (4 vCPU, 8GB,  London, Dedicated CPU-Optimized)
 
 # ======================== SSH LOGIN ========================
 # Terminal 1 (RTM — runs on cloud0):
-#   ssh root@<CLOUD0_IP>
+#   ssh root@188.166.146.111
 #
 # Terminal 2 (cloud0 device):
-#   ssh root@<CLOUD0_IP>
+#   ssh root@188.166.146.111
 #
 # Terminal 3 (mid0 device):
-#   ssh root@<MID0_IP>
+#   ssh root@159.65.24.36
 #
 # Terminal 4 (edge0 device):
-#   ssh root@<EDGE0_IP>
+#   ssh root@159.65.31.18
 
 # ======================== QUICK CONNECTIVITY CHECK ========================
 check_cluster() {
     echo "Checking cluster connectivity..."
-    echo -n "  edge0 (<EDGE0_IP>): "
-    ping -c 1 -W 2 <EDGE0_IP> 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
-    echo -n "  mid0  (<MID0_IP>): "
-    ping -c 1 -W 2 <MID0_IP> 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
-    echo -n "  cloud0 (<CLOUD0_IP>): "
-    ping -c 1 -W 2 <CLOUD0_IP> 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
+    echo -n "  edge0 (159.65.31.18): "
+    ping -c 1 -W 2 159.65.31.18 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
+    echo -n "  mid0  (159.65.24.36): "
+    ping -c 1 -W 2 159.65.24.36 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
+    echo -n "  cloud0 (188.166.146.111): "
+    ping -c 1 -W 2 188.166.146.111 2>/dev/null | grep "time=" | awk '{print $7}' || echo "UNREACHABLE"
 }
 
 # ======================== PUSH CODE TO ALL VMS ========================
 push_code() {
     echo "Pushing code to all VMs..."
-    for IP in <EDGE0_IP> <MID0_IP> <CLOUD0_IP>; do
+    for IP in 159.65.31.18 159.65.24.36 188.166.146.111; do
         echo "  → $IP"
         rsync -avz --quiet \
             --exclude='*.pdf' --exclude='*.docx' --exclude='*.pickle' \
@@ -52,14 +52,14 @@ push_code() {
 # ======================== PUSH PICKLES TO RTM (cloud0) ========================
 push_pickles() {
     echo "Pushing pickles to cloud0 (RTM)..."
-    scp ./output/*.pickle root@<CLOUD0_IP>:~/ttpython/output/
+    scp ./output/*.pickle root@188.166.146.111:~/ttpython/output/
     echo "Done."
 }
 
 # ======================== PUSH MAPPINGS TO RTM (cloud0) ========================
 push_mappings() {
     echo "Pushing mappings to cloud0 (RTM)..."
-    scp -r evals/runtime_mappings/* root@<CLOUD0_IP>:~/ttpython/mappings/
+    scp -r evals/runtime_mappings/* root@188.166.146.111:~/ttpython/mappings/
     echo "Done."
 }
 
@@ -67,7 +67,7 @@ push_mappings() {
 collect_logs() {
     mkdir -p runtime_logs
     echo "Collecting runtime logs..."
-    for IP in <EDGE0_IP> <MID0_IP> <CLOUD0_IP>; do
+    for IP in 159.65.31.18 159.65.24.36 188.166.146.111; do
         echo "  ← $IP"
         scp root@$IP:~/ttpython/runtime_log_*.jsonl ./runtime_logs/ 2>/dev/null
     done

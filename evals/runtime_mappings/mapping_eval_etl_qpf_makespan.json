@@ -2,66 +2,81 @@
   "run_id": "eval_etl_qpf_makespan",
   "workload": "eval_etl",
   "strategy": "qpf_makespan",
-  "predicted_makespan_ms": 290.6842202884215,
-  "predicted_energy_joules": 9.84896765506184,
-  "trial_id": 13,
-  "seed": 13,
+  "predicted_makespan_ms": 436.39993587111627,
+  "predicted_energy_joules": 12.948695889408517,
+  "trial_id": 26,
+  "seed": 26,
   "mapping": {
     "CONST-0": "edge0",
-    "READ_TTCLOCK-1": "mid0",
-    "CONST-2": "edge0",
-    "CONST-3": "cloud0",
-    "MULT-4": "cloud0",
-    "ADD-5": "cloud0",
+    "READ_TTCLOCK-1": "server0",
+    "CONST-2": "mid0",
+    "CONST-3": "edge0",
+    "MULT-4": "mid1",
+    "ADD-5": "mid0",
     "VALUES_TO_TTTIME-6": "mid0",
-    "COPY_TTTIME-7": "cloud0",
-    "CONST-8": "edge0",
-    "senml_spout-9": "edge0",
-    "senml_parse-10": "edge0",
-    "range_filter-11": "cloud0",
-    "bloom_filter-12": "cloud0",
-    "interpolation-13": "mid0",
-    "join_bolt-14": "cloud0",
-    "annotation-15": "cloud0",
-    "csv_to_senml-16": "cloud0",
-    "mqtt_publish-17": "cloud0",
-    "etl_sink-18": "mid0"
+    "COPY_TTTIME-7": "edge1",
+    "CONST-8": "nuc0",
+    "senml_spout-9": "edge1",
+    "senml_parse-10": "mid0",
+    "range_filter-11": "edge1",
+    "bloom_filter-12": "server0",
+    "interpolation-13": "server0",
+    "join_bolt-14": "mid0",
+    "annotation-15": "mid0",
+    "csv_to_senml-16": "mid1",
+    "mqtt_publish-17": "mid0",
+    "etl_sink-18": "nuc0"
   },
   "device_distribution": {
     "edge0": {
-      "sq_count": 5,
+      "sq_count": 2,
       "sq_names": [
         "CONST-0",
-        "CONST-2",
-        "CONST-8",
-        "senml_spout-9",
-        "senml_parse-10"
+        "CONST-3"
+      ]
+    },
+    "server0": {
+      "sq_count": 3,
+      "sq_names": [
+        "READ_TTCLOCK-1",
+        "bloom_filter-12",
+        "interpolation-13"
       ]
     },
     "mid0": {
-      "sq_count": 4,
+      "sq_count": 7,
       "sq_names": [
-        "READ_TTCLOCK-1",
-        "VALUES_TO_TTTIME-6",
-        "interpolation-13",
-        "etl_sink-18"
-      ]
-    },
-    "cloud0": {
-      "sq_count": 10,
-      "sq_names": [
-        "CONST-3",
-        "MULT-4",
+        "CONST-2",
         "ADD-5",
-        "COPY_TTTIME-7",
-        "range_filter-11",
-        "bloom_filter-12",
+        "VALUES_TO_TTTIME-6",
+        "senml_parse-10",
         "join_bolt-14",
         "annotation-15",
-        "csv_to_senml-16",
         "mqtt_publish-17"
+      ]
+    },
+    "mid1": {
+      "sq_count": 2,
+      "sq_names": [
+        "MULT-4",
+        "csv_to_senml-16"
+      ]
+    },
+    "edge1": {
+      "sq_count": 3,
+      "sq_names": [
+        "COPY_TTTIME-7",
+        "senml_spout-9",
+        "range_filter-11"
+      ]
+    },
+    "nuc0": {
+      "sq_count": 2,
+      "sq_names": [
+        "CONST-8",
+        "etl_sink-18"
       ]
     }
   },
-  "extracted_from": "evals/results/2026-03-14_11-55-16_placement_quality/eval_etl_qpf_makespan.json"
+  "extracted_from": "evals/results/2026-07-09_11-27-24_placement_quality\\eval_etl_qpf_makespan.json"
 }
